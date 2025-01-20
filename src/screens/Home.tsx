@@ -1,8 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import Button from '../components/Button';
 import {AppColors} from '../utils/colors';
+import InfoBlock from '../components/InfoBlock';
+import {ASSETS} from '../utils/assets';
+import {homeData} from '../db/homeData';
+import IntroBlock from '../components/IntroBlock';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -17,19 +21,28 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.introduction}>
-        <Text style={styles.title}>Welcome to Our App!</Text>
-        <Text style={styles.description}>Some description about the app</Text>
-      </View>
+      <ScrollView contentContainerStyle={styles.gridContainer}>
+        <View style={styles.gridRow}>
+          <View style={styles.gridColumn}>
+            <IntroBlock image={ASSETS.bitcoin} />
+            {homeData.slice(0, 2).map(data => (
+              <InfoBlock images={data.images} title={data.title} />
+            ))}
+          </View>
+          <View style={[styles.gridColumn, {marginTop: 40}]}>
+            {homeData.slice(2).map(data => (
+              <InfoBlock images={data.images} title={data.title} />
+            ))}
+          </View>
+        </View>
+      </ScrollView>
 
-      <View style={styles.buttons}>
-        <Button title="Sign Up" onPress={openSignUpModal} />
-        <Button
-          title="Sign In"
-          onPress={openSignInModal}
-          backgroundColor={AppColors.primary}
-        />
-      </View>
+      <Button title="Sign Up" onPress={openSignUpModal} />
+      <Button
+        title="Sign In"
+        onPress={openSignInModal}
+        backgroundColor={AppColors.primary}
+      />
     </View>
   );
 };
@@ -40,6 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    marginBottom: 50,
   },
   introduction: {
     flex: 1,
@@ -53,7 +67,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 40,
   },
-  buttons: {},
+  gridContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 16,
+  },
+  gridRow: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+  gridColumn: {
+    flex: 1,
+    marginHorizontal: 8,
+  },
 });
 
 export default Home;

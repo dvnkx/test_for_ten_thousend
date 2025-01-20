@@ -9,7 +9,7 @@ type ButtonProps = {
 };
 
 const Button: FC<ButtonProps> = ({title, backgroundColor, onPress}) => {
-  const textColor = backgroundColor ? '#fff' : AppColors.primary;
+  const textColor = backgroundColor ? AppColors.lotion : AppColors.primary;
   const buttonBackgroundColor = backgroundColor || '';
 
   return (
@@ -22,6 +22,7 @@ const Button: FC<ButtonProps> = ({title, backgroundColor, onPress}) => {
 
 const styles = StyleSheet.create({
   button: {
+    width: '90%',
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 5,
