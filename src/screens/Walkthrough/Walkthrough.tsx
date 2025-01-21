@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
@@ -11,13 +11,13 @@ import {InfoBlock, IntroBlock} from './components';
 const Walkthrough = () => {
   const navigation = useNavigation<NavigationProps>();
 
-  const openSignUpModal = () => {
+  const openSignUpModal = useCallback(() => {
     navigation.navigate(Routes.SIGNUP);
-  };
+  }, [navigation]);
 
-  const openSignInModal = () => {
+  const openSignInModal = useCallback(() => {
     navigation.navigate(Routes.SIGNIN);
-  };
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
