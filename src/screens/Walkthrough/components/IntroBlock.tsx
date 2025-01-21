@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Image, ImageSourcePropType, StyleSheet, View} from 'react-native';
-import {AppStyles} from '../utils/styles';
+import {AppStyles} from '../../../utils/styles';
 
 type IntroBlockProps = {
   image: ImageSourcePropType;

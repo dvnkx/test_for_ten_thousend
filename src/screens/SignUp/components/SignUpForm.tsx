@@ -1,11 +1,10 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
-import Input from './Input';
-import Button from './Button';
-import {AppColors} from '../utils/colors';
-import {signUpSchema, signUpValues} from '../schemas/signUp.schema';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {signUpValues, signUpSchema} from '../../../schemas/signUp.schema';
+import {AppColors} from '../../../utils/colors';
+import {Button, Input} from '../../../components';
 
 const SignUpForm = () => {
   const {

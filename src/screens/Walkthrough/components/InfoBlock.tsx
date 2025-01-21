@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {View, Image, StyleSheet, Text} from 'react-native';
-import {AppStyles} from '../utils/styles';
+import {AppStyles} from '../../../utils/styles';
 
 type InfoBlockProps = {
   images: any[];

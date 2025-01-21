@@ -1,15 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import Button from '../components/Button';
-import {AppColors} from '../utils/colors';
-import InfoBlock from '../components/InfoBlock';
-import {ASSETS} from '../utils/assets';
-import {homeData} from '../db/homeData';
-import IntroBlock from '../components/IntroBlock';
-import {NavigationProps, Routes} from '../utils/routes';
+import {Button} from '../../components';
+import {AppColors} from '../../utils/colors';
+import {ASSETS} from '../../utils/assets';
+import {homeData} from '../../db/homeData';
+import {NavigationProps, Routes} from '../../utils/routes';
+import {InfoBlock, IntroBlock} from './components';
 
-const Home = () => {
+const Walkthrough = () => {
   const navigation = useNavigation<NavigationProps>();
 
   const openSignUpModal = () => {
@@ -91,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Walkthrough;

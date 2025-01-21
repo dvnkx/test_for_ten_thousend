@@ -1,12 +1,12 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export enum Routes {
-  HOME = 'Home',
+  WALKTHROUGH = 'Walkthrough',
   SIGNUP = 'SignUp',
 }
 
 export type RoutesType = {
-  Home: {name: string} | undefined;
+  Walkthrough: {name: string} | undefined;
   SignUp: {name: string} | undefined;
 };
 

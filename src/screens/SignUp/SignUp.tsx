@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {AppColors} from '../utils/colors';
-import SignUpForm from '../components/SignUpForm';
-import {ASSETS} from '../utils/assets';
+import {AppColors} from '../../utils/colors';
+
+import {ASSETS} from '../../utils/assets';
+import SignUpForm from './components/SignUpForm';
 
 const UserSection = () => {
   return (
