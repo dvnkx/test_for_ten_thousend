@@ -1,14 +1,14 @@
 import React, {useCallback} from 'react';
 import {useForm} from 'react-hook-form';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {signUpValues} from '../../../schemas/signUp.schema';
 import {AppColors} from '../../../utils/colors';
 import {Button, Input} from '../../../components';
-import {signInSchema} from '../../../schemas/signIn.schema';
+import {signInSchema, signInValues} from '../../../schemas/signIn.schema';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps, Routes} from '../../../utils/routes';
 import {AppStyles} from '../../../utils/styles';
+import axios from 'axios';
 
 const SignInForm = () => {
   const {
@@ -17,9 +17,9 @@ const SignInForm = () => {
     formState: {errors},
     setValue,
     watch,
-  } = useForm<signUpValues>({
+  } = useForm<signInValues>({
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
     resolver: zodResolver(signInSchema),
@@ -31,20 +31,37 @@ const SignInForm = () => {
     navigation.navigate(Routes.SIGNUP);
   }, [navigation]);
 
-  const onSubmit = (data: signUpValues) => {
-    console.log(` Email: ${data.email} Password: ${data.password}`);
+  const onSubmit = async (data: signInValues) => {
+    console.log(`Username: ${data.username} Password: ${data.password}`);
+
+    try {
+      const response = await axios.post('https://dummyjson.com/user/login', {
+        username: data.username,
+        password: data.password,
+      });
+
+      const {accessToken} = response.data;
+
+      if (accessToken) {
+        Alert.alert('Success', `Login successful! ${response.data.username}`);
+      } else {
+        Alert.alert('Error', 'Login failed, please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      Alert.alert('Error', 'An error occurred, please try again later.');
+    }
   };
 
   return (
     <View style={AppStyles.formContainer}>
       <Input
-        label="Email"
-        {...register('email')}
-        onChangeText={text => setValue('email', text)}
-        value={watch('email')}
-        keyboardType="email-address"
-        errorMessage={errors.email?.message}
-        placeholder="Email@..."
+        label="Username"
+        {...register('username')}
+        onChangeText={text => setValue('username', text)}
+        value={watch('username')}
+        errorMessage={errors.username?.message}
+        placeholder="Username..."
       />
       <Input
         label="Password"
@@ -55,7 +72,7 @@ const SignInForm = () => {
         errorMessage={errors.password?.message}
         placeholder="Password..."
       />
-      <View style={[AppStyles.formButtons, {marginTop: 150}]}>
+      <View style={[AppStyles.formButtons, {marginTop: 150, gap: 15}]}>
         <Button
           title="Continue"
           backgroundColor={AppColors.primary}
