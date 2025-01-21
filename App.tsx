@@ -1,16 +1,25 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {useColorScheme, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {enableScreens} from 'react-native-screens';
+import {Routes, RoutesType} from './src/utils/routes';
+import {createStackNavigator} from '@react-navigation/stack';
+import SignUp from './src/screens/SignUp/SignUp';
+import Walkthrough from './src/screens/Walkthrough/Walkthrough';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+enableScreens();
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const Stack = createStackNavigator<RoutesType>();
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return <View style={backgroundStyle}></View>;
-}
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={Routes.WALKTHROUGH}>
+        <Stack.Screen name={Routes.WALKTHROUGH} component={Walkthrough} />
+        <Stack.Screen name={Routes.SIGNUP} component={SignUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;
