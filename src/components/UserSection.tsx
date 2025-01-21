@@ -1,7 +1,10 @@
-import {TouchableOpacity, View, Image, Text, StyleSheet} from 'react-native';
-import {ASSETS} from '../utils/assets';
+import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+
 import {AppColors} from '../utils/colors';
 import React, {FC} from 'react';
+import {ASSETS} from '../utils/assets';
+import IconContainer from './IconContainer';
+import {AppStyles} from '../utils/styles';
 
 type UserSectionProps = {
   title: string;
@@ -10,14 +13,13 @@ type UserSectionProps = {
 const UserSection: FC<UserSectionProps> = ({title}) => {
   return (
     <TouchableOpacity style={styles.user}>
+      <IconContainer
+        icon={ASSETS.person}
+        containerStyles={styles.iconContainer}
+      />
       <View>
-        <View style={styles.avatar}>
-          <Image style={styles.avatarImg} source={ASSETS.addAvatar} />
-        </View>
-      </View>
-      <View>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>Personal Account</Text>
+        <Text style={AppStyles.title}>{title}</Text>
+        <Text style={AppStyles.subtitle}>Personal Account</Text>
       </View>
     </TouchableOpacity>
   );
@@ -33,26 +35,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: AppColors.chinese_silver,
   },
-  avatar: {
+  iconContainer: {
     backgroundColor: 'rgba(136, 231, 136, 0.3)',
     borderRadius: 50,
     padding: 10,
     marginRight: 10,
     marginLeft: 16,
-  },
-  avatarImg: {
-    width: 20,
-    height: 20,
-  },
-  title: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: AppColors.dark_charcoal,
-  },
-  subtitle: {
-    fontSize: 15,
-    color: AppColors.granite_gray,
-    marginTop: 4,
   },
 });
 

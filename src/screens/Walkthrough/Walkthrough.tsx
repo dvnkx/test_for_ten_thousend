@@ -3,10 +3,10 @@ import React, {useCallback} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
-import {ASSETS} from '../../utils/assets';
 import {homeData} from '../../db/homeData';
 import {NavigationProps, Routes} from '../../utils/routes';
 import {InfoBlock, IntroBlock} from './components';
+import {ASSETS} from '../../utils/assets';
 
 const Walkthrough = () => {
   const navigation = useNavigation<NavigationProps>();

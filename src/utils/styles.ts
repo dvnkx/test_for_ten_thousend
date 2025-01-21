@@ -31,6 +31,17 @@ export const AppStyles = StyleSheet.create({
     borderTopRightRadius: 30,
   },
 
+  title: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: AppColors.dark_charcoal,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: AppColors.granite_gray,
+    marginTop: 4,
+  },
+
   formContainer: {
     width: '100%',
     display: 'flex',

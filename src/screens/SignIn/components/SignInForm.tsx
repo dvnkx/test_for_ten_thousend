@@ -31,9 +31,11 @@ const SignInForm = () => {
     navigation.navigate(Routes.SIGNUP);
   }, [navigation]);
 
-  const onSubmit = async (data: signInValues) => {
-    console.log(`Username: ${data.username} Password: ${data.password}`);
+  const navigateToPinCode = useCallback(() => {
+    navigation.navigate(Routes.PINCODE);
+  }, [navigation]);
 
+  const onSubmit = async (data: signInValues) => {
     try {
       const response = await axios.post('https://dummyjson.com/user/login', {
         username: data.username,
@@ -43,13 +45,12 @@ const SignInForm = () => {
       const {accessToken} = response.data;
 
       if (accessToken) {
-        Alert.alert('Success', `Login successful! ${response.data.username}`);
+        navigateToPinCode();
       } else {
         Alert.alert('Error', 'Login failed, please try again.');
       }
     } catch (error) {
-      console.error('Login error:', error);
-      Alert.alert('Error', 'An error occurred, please try again later.');
+      Alert.alert('Error', 'An error occurred, please try again.');
     }
   };
 
