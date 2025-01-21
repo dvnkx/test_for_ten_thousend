@@ -42,6 +42,7 @@ const SignUpForm = () => {
         {...register('email')}
         onChangeText={text => setValue('email', text)}
         value={watch('email')}
+        keyboardType="email-address"
         errorMessage={errors.email?.message}
       />
       <Input

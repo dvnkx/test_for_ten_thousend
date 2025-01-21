@@ -9,7 +9,7 @@ const SignUp = () => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
-        <UserSection title="Sign Up" subtitle="Personal Account" />
+        <UserSection title="Sign Up" />
         <SignUpForm />
       </View>
     </View>
