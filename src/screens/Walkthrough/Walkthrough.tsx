@@ -16,7 +16,7 @@ const Walkthrough = () => {
   };
 
   const openSignInModal = () => {
-    // navigation.navigate('SignInModal');
+    navigation.navigate(Routes.SIGNIN);
   };
 
   return (

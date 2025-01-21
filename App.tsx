@@ -6,6 +6,7 @@ import {Routes, RoutesType} from './src/utils/routes';
 import {createStackNavigator} from '@react-navigation/stack';
 import SignUp from './src/screens/SignUp/SignUp';
 import Walkthrough from './src/screens/Walkthrough/Walkthrough';
+import SignIn from './src/screens/SignIn/SignIn';
 
 enableScreens();
 
@@ -17,6 +18,7 @@ const App = () => {
       <Stack.Navigator initialRouteName={Routes.WALKTHROUGH}>
         <Stack.Screen name={Routes.WALKTHROUGH} component={Walkthrough} />
         <Stack.Screen name={Routes.SIGNUP} component={SignUp} />
+        <Stack.Screen name={Routes.SIGNIN} component={SignIn} />
       </Stack.Navigator>
     </NavigationContainer>
   );
