@@ -5,10 +5,11 @@ import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
 import IconContainer from '../../components/IconContainer';
 import {AppStyles} from '../../utils/styles';
-import {useDispatch} from 'react-redux';
-import {addPin} from '../../redux/slices/auth.slice';
+import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps, Routes} from '../../utils/routes';
+import Keychain from 'react-native-keychain';
+import {RootState} from '../../redux/store';
 
 type KeyPadProps = {
   handleKeyPress: (value: string) => void;
@@ -90,17 +91,26 @@ const KeyContainer: FC<KeyContainerProps> = ({pin}) => {
 
 const PinCode = () => {
   const [pin, setPin] = useState<string>('');
-  const dispatch = useDispatch();
+  const {token} = useSelector((state: RootState) => state.auth);
+
   const navigation = useNavigation<NavigationProps>();
 
   const navigateToHome = useCallback(() => {
     navigation.navigate(Routes.HOME);
   }, [navigation]);
 
-  const onSubmit = () => {
-    dispatch(addPin({pin}));
+  const onSubmit = async () => {
+    if (token) {
+      await Keychain.setGenericPassword(pin, token, {
+        service: 'userPin',
+      });
 
-    navigateToHome();
+      setPin('');
+
+      navigateToHome();
+    } else {
+      return;
+    }
   };
 
   const handleKeyPress = (value: string) => {
@@ -120,13 +130,15 @@ const PinCode = () => {
         <Text style={[AppStyles.title, {marginVertical: 15}]}>
           Create a Pin code
         </Text>
-        <Text style={AppStyles.subtitle}>enter 5 digit code:</Text>
+        <Text style={AppStyles.subtitle}>Enter a 5-digit PIN</Text>
         <KeyContainer pin={pin} />
       </View>
+
       <KeyPad
         handleKeyPress={handleKeyPress}
         handleBackspace={handleBackspace}
       />
+
       <Button
         title="Continue"
         backgroundColor={AppColors.primary}
