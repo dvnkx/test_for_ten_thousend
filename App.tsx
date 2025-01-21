@@ -13,6 +13,7 @@ import {queryClient} from './src/api/client';
 import {Provider} from 'react-redux';
 import store, {persistor} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import Home from './src/screens/Home/Home';
 
 enableScreens();
 
@@ -29,6 +30,7 @@ const App = () => {
               <Stack.Screen name={Routes.SIGNUP} component={SignUp} />
               <Stack.Screen name={Routes.SIGNIN} component={SignIn} />
               <Stack.Screen name={Routes.PINCODE} component={PinCode} />
+              <Stack.Screen name={Routes.HOME} component={Home} />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>

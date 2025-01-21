@@ -1,10 +1,14 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {ASSETS} from '../../utils/assets';
 import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
 import IconContainer from '../../components/IconContainer';
 import {AppStyles} from '../../utils/styles';
+import {useDispatch} from 'react-redux';
+import {addPin} from '../../redux/slices/auth.slice';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProps, Routes} from '../../utils/routes';
 
 type KeyPadProps = {
   handleKeyPress: (value: string) => void;
@@ -86,8 +90,18 @@ const KeyContainer: FC<KeyContainerProps> = ({pin}) => {
 
 const PinCode = () => {
   const [pin, setPin] = useState<string>('');
+  const dispatch = useDispatch();
+  const navigation = useNavigation<NavigationProps>();
 
-  const onSubmit = () => {};
+  const navigateToHome = useCallback(() => {
+    navigation.navigate(Routes.HOME);
+  }, [navigation]);
+
+  const onSubmit = () => {
+    dispatch(addPin({pin}));
+
+    navigateToHome();
+  };
 
   const handleKeyPress = (value: string) => {
     if (pin.length < 5) {

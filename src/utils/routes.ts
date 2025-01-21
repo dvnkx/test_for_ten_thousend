@@ -5,6 +5,8 @@ export enum Routes {
   SIGNUP = 'SignUp',
   SIGNIN = 'SignIn',
   PINCODE = 'PinCode',
+
+  HOME = 'Home',
 }
 
 export type RoutesType = {
@@ -12,6 +14,7 @@ export type RoutesType = {
   SignUp: {name: string} | undefined;
   SignIn: {name: string} | undefined;
   PinCode: {name: string} | undefined;
+  Home: {name: string} | undefined;
 };
 
 export type NavigationProps = StackNavigationProp<RoutesType>;
