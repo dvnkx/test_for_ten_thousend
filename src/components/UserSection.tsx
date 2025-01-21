@@ -5,10 +5,9 @@ import {FC} from 'react';
 
 type UserSectionProps = {
   title: string;
-  subtitle: string;
 };
 
-const UserSection: FC<UserSectionProps> = ({title, subtitle}) => {
+const UserSection: FC<UserSectionProps> = ({title}) => {
   return (
     <TouchableOpacity style={styles.user}>
       <View>
@@ -18,7 +17,7 @@ const UserSection: FC<UserSectionProps> = ({title, subtitle}) => {
       </View>
       <View>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        <Text style={styles.subtitle}>Personal Account</Text>
       </View>
     </TouchableOpacity>
   );
