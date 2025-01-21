@@ -1,7 +1,7 @@
 import {TouchableOpacity, View, Image, Text, StyleSheet} from 'react-native';
 import {ASSETS} from '../utils/assets';
 import {AppColors} from '../utils/colors';
-import {FC} from 'react';
+import React, {FC} from 'react';
 
 type UserSectionProps = {
   title: string;

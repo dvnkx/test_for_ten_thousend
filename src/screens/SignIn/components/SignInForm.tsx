@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useForm} from 'react-hook-form';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {signUpValues, signUpSchema} from '../../../schemas/signUp.schema';
+import {signUpValues} from '../../../schemas/signUp.schema';
 import {AppColors} from '../../../utils/colors';
 import {Button, Input} from '../../../components';
 import {signInSchema} from '../../../schemas/signIn.schema';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProps, Routes} from '../../../utils/routes';
+import {AppStyles} from '../../../utils/styles';
 
 const SignInForm = () => {
   const {
@@ -22,12 +25,18 @@ const SignInForm = () => {
     resolver: zodResolver(signInSchema),
   });
 
+  const navigation = useNavigation<NavigationProps>();
+
+  const navigateToSignUp = useCallback(() => {
+    navigation.navigate(Routes.SIGNUP);
+  }, [navigation]);
+
   const onSubmit = (data: signUpValues) => {
     console.log(` Email: ${data.email} Password: ${data.password}`);
   };
 
   return (
-    <View style={styles.container}>
+    <View style={AppStyles.formContainer}>
       <Input
         label="Email"
         {...register('email')}
@@ -35,6 +44,7 @@ const SignInForm = () => {
         value={watch('email')}
         keyboardType="email-address"
         errorMessage={errors.email?.message}
+        placeholder="Email@..."
       />
       <Input
         label="Password"
@@ -43,36 +53,18 @@ const SignInForm = () => {
         value={watch('password')}
         secureTextEntry
         errorMessage={errors.password?.message}
+        placeholder="Password..."
       />
-      <View style={styles.buttons}>
+      <View style={[AppStyles.formButtons, {marginTop: 150}]}>
         <Button
           title="Continue"
           backgroundColor={AppColors.primary}
           onPress={handleSubmit(onSubmit)}
         />
-        <Button title="Create Account" onPress={handleSubmit(onSubmit)} />
+        <Button title="Create Account" onPress={navigateToSignUp} />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 16,
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 150,
-    width: '100%',
-  },
-});
 
 export default SignInForm;

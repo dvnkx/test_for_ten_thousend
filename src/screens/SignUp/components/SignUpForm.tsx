@@ -1,10 +1,11 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {signUpValues, signUpSchema} from '../../../schemas/signUp.schema';
 import {AppColors} from '../../../utils/colors';
 import {Button, Input} from '../../../components';
+import {AppStyles} from '../../../utils/styles';
 
 const SignUpForm = () => {
   const {
@@ -29,13 +30,14 @@ const SignUpForm = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={AppStyles.formContainer}>
       <Input
         label="Name"
         {...register('name')}
         onChangeText={text => setValue('name', text)}
         value={watch('name')}
         errorMessage={errors.name?.message}
+        placeholder="Name..."
       />
       <Input
         label="Email"
@@ -44,6 +46,7 @@ const SignUpForm = () => {
         value={watch('email')}
         keyboardType="email-address"
         errorMessage={errors.email?.message}
+        placeholder="Email@..."
       />
       <Input
         label="Password"
@@ -52,8 +55,9 @@ const SignUpForm = () => {
         value={watch('password')}
         secureTextEntry
         errorMessage={errors.password?.message}
+        placeholder="Password..."
       />
-      <View style={styles.button}>
+      <View style={AppStyles.formButtons}>
         <Button
           title="Continue"
           backgroundColor={AppColors.primary}
@@ -63,23 +67,5 @@ const SignUpForm = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 16,
-  },
-  button: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-    width: '100%',
-  },
-});
 
 export default SignUpForm;

@@ -33,6 +33,7 @@ const Walkthrough = () => {
               />
             ))}
           </View>
+
           <View style={[styles.gridColumn, {marginTop: 40}]}>
             {homeData.slice(2).map(data => (
               <InfoBlock
