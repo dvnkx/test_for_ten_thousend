@@ -7,12 +7,13 @@ import InfoBlock from '../components/InfoBlock';
 import {ASSETS} from '../utils/assets';
 import {homeData} from '../db/homeData';
 import IntroBlock from '../components/IntroBlock';
+import {NavigationProps, Routes} from '../utils/routes';
 
 const Home = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
 
   const openSignUpModal = () => {
-    // navigation.navigate('SignUpModal');
+    navigation.navigate(Routes.SIGNUP);
   };
 
   const openSignInModal = () => {
@@ -26,17 +27,24 @@ const Home = () => {
           <View style={styles.gridColumn}>
             <IntroBlock image={ASSETS.bitcoin} />
             {homeData.slice(0, 2).map(data => (
-              <InfoBlock images={data.images} title={data.title} />
+              <InfoBlock
+                key={data.title}
+                images={data.images}
+                title={data.title}
+              />
             ))}
           </View>
           <View style={[styles.gridColumn, {marginTop: 40}]}>
             {homeData.slice(2).map(data => (
-              <InfoBlock images={data.images} title={data.title} />
+              <InfoBlock
+                key={data.title}
+                images={data.images}
+                title={data.title}
+              />
             ))}
           </View>
         </View>
       </ScrollView>
-
       <Button title="Sign Up" onPress={openSignUpModal} />
       <Button
         title="Sign In"

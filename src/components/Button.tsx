@@ -14,6 +14,7 @@ const Button: FC<ButtonProps> = ({title, backgroundColor, onPress}) => {
 
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[styles.button, {backgroundColor: buttonBackgroundColor}]}>
       <Text style={[styles.text, {color: textColor}]}>{title}</Text>
     </TouchableOpacity>

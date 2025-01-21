@@ -6,4 +6,6 @@ export const ASSETS = {
   snapchat: require('../pictures/snapchat-logo.png'),
   whatsapp: require('../pictures/whatsapp-logo.png'),
   youtube: require('../pictures/youtube-logo.png'),
+
+  addAvatar: require('../pictures/add-avatar.png'),
 };
