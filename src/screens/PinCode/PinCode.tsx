@@ -103,7 +103,9 @@ const PinCodeScreen = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <IconContainer icon={ASSETS.smartphone} />
-        <Text style={AppStyles.title}>Create a Pin code</Text>
+        <Text style={[AppStyles.title, {marginVertical: 15}]}>
+          Create a Pin code
+        </Text>
         <Text style={AppStyles.subtitle}>enter 5 digit code:</Text>
         <KeyContainer pin={pin} />
       </View>
@@ -147,6 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   keypad: {
+    marginTop: 150,
     width: '100%',
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -156,11 +159,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginBottom: 16,
+    marginVertical: 8,
   },
   key: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
