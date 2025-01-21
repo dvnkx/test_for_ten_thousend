@@ -1,5 +1,12 @@
 import React, {FC, useCallback, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Alert,
+} from 'react-native';
 import {ASSETS} from '../../utils/assets';
 import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
@@ -91,6 +98,8 @@ const KeyContainer: FC<KeyContainerProps> = ({pin}) => {
 
 const PinCode = () => {
   const [pin, setPin] = useState<string>('');
+  const [step, setStep] = useState<'create' | 'confirm'>('create');
+  const [tempPin, setTempPin] = useState<string | null>(null);
   const {token} = useSelector((state: RootState) => state.auth);
 
   const navigation = useNavigation<NavigationProps>();
@@ -98,20 +107,6 @@ const PinCode = () => {
   const navigateToHome = useCallback(() => {
     navigation.navigate(Routes.HOME);
   }, [navigation]);
-
-  const onSubmit = async () => {
-    if (token) {
-      await Keychain.setGenericPassword(pin, token, {
-        service: 'userPin',
-      });
-
-      setPin('');
-
-      navigateToHome();
-    } else {
-      return;
-    }
-  };
 
   const handleKeyPress = (value: string) => {
     if (pin.length < 5) {
@@ -123,14 +118,38 @@ const PinCode = () => {
     setPin(prev => prev.slice(0, -1));
   };
 
+  const onSubmit = async () => {
+    if (step === 'create') {
+      setTempPin(pin);
+      setPin('');
+      setStep('confirm');
+    } else if (step === 'confirm') {
+      if (pin === tempPin) {
+        if (token) {
+          await Keychain.setGenericPassword(pin, token, {
+            service: 'userPin',
+          });
+          navigateToHome();
+        } else {
+          Alert.alert('Error', 'Authentication token is missing.');
+        }
+      } else {
+        Alert.alert('Error', 'PIN codes do not match. Try again.');
+        setStep('create');
+      }
+      setPin('');
+      setTempPin(null);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <IconContainer icon={ASSETS.smartphone} />
         <Text style={[AppStyles.title, {marginVertical: 15}]}>
-          Create a Pin code
+          {step === 'create' ? 'Create a PIN code' : 'Repeat a PIN code'}
         </Text>
-        <Text style={AppStyles.subtitle}>Enter a 5-digit PIN</Text>
+        <Text style={AppStyles.subtitle}>enter 5 digit code</Text>
         <KeyContainer pin={pin} />
       </View>
 
