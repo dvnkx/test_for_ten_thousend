@@ -7,5 +7,7 @@ export const ASSETS = {
   whatsapp: require('../pictures/whatsapp-logo.png'),
   youtube: require('../pictures/youtube-logo.png'),
 
-  addAvatar: require('../pictures/add-avatar.png'),
+  person: require('../pictures/person.png'),
+  smartphone: require('../pictures/smartphone.png'),
+  backspace: require('../pictures/backspace.png'),
 };

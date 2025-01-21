@@ -1,19 +1,19 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import SignUpForm from './components/SignUpForm';
 import UserSection from '../../components/UserSection';
+import SignInForm from './components/SignInForm';
 import {AppStyles} from '../../utils/styles';
 
-const SignUp = () => {
+const SignIn = () => {
   return (
     <View style={AppStyles.authWrapper}>
       <View style={AppStyles.authContainer}>
-        <UserSection title="Sign Up" />
-        <SignUpForm />
+        <UserSection title="Login" />
+        <SignInForm />
       </View>
     </View>
   );
 };
 
-export default SignUp;
+export default SignIn;

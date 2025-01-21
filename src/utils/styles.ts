@@ -14,4 +14,47 @@ export const AppStyles = StyleSheet.create({
     shadowRadius: 4,
     marginBottom: 16,
   },
+
+  authWrapper: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  authContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    height: '80%',
+    backgroundColor: AppColors.lotion,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+  },
+
+  title: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: AppColors.dark_charcoal,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: AppColors.granite_gray,
+    marginTop: 4,
+  },
+
+  formContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 16,
+  },
+  formButtons: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+    width: '100%',
+  },
 });

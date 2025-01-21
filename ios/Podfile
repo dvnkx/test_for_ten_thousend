@@ -31,6 +31,7 @@ target 'AwesomeProject' do
   end
 
   post_install do |installer|
+    pod 'React-RCTKeychain', :path => '../node_modules/react-native-keychain'
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,

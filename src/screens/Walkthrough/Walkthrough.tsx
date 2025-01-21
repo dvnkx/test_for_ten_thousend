@@ -1,23 +1,23 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
-import {ASSETS} from '../../utils/assets';
 import {homeData} from '../../db/homeData';
 import {NavigationProps, Routes} from '../../utils/routes';
 import {InfoBlock, IntroBlock} from './components';
+import {ASSETS} from '../../utils/assets';
 
 const Walkthrough = () => {
   const navigation = useNavigation<NavigationProps>();
 
-  const openSignUpModal = () => {
+  const openSignUpModal = useCallback(() => {
     navigation.navigate(Routes.SIGNUP);
-  };
+  }, [navigation]);
 
-  const openSignInModal = () => {
-    // navigation.navigate('SignInModal');
-  };
+  const openSignInModal = useCallback(() => {
+    navigation.navigate(Routes.SIGNIN);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -33,6 +33,7 @@ const Walkthrough = () => {
               />
             ))}
           </View>
+
           <View style={[styles.gridColumn, {marginTop: 40}]}>
             {homeData.slice(2).map(data => (
               <InfoBlock
