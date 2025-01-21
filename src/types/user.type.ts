@@ -5,6 +5,5 @@ export type UserType = {
   id: number;
   image: string;
   lastName: string;
-  refreshToken: string;
   username: string;
 };

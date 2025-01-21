@@ -13,6 +13,8 @@ import {useDispatch} from 'react-redux';
 import {login} from '../../../redux/slices/auth.slice';
 import {useMutation} from '@tanstack/react-query';
 import Loader from '../../../components/Loader';
+import loginUser from '../../../api/services/login';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const SignInForm = () => {
   const {
@@ -42,15 +44,13 @@ const SignInForm = () => {
 
   const mutation = useMutation({
     mutationFn: async (data: signInValues) => {
-      const response = await axios.post('https://dummyjson.com/user/login', {
-        username: data.username,
-        password: data.password,
-      });
-      return response.data;
+      return loginUser(data.username, data.password);
     },
     onSuccess: data => {
-      const {accessToken, ...userData} = data;
+      const {accessToken, refreshToken, ...userData} = data;
+
       dispatch(login({token: accessToken, user: userData}));
+
       navigateToPinCode();
     },
     onError: () => {
