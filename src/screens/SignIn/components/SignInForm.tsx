@@ -9,6 +9,10 @@ import {useNavigation} from '@react-navigation/native';
 import {NavigationProps, Routes} from '../../../utils/routes';
 import {AppStyles} from '../../../utils/styles';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {login} from '../../../redux/slices/auth.slice';
+import {useMutation} from '@tanstack/react-query';
+import Loader from '../../../components/Loader';
 
 const SignInForm = () => {
   const {
@@ -26,6 +30,7 @@ const SignInForm = () => {
   });
 
   const navigation = useNavigation<NavigationProps>();
+  const dispatch = useDispatch();
 
   const navigateToSignUp = useCallback(() => {
     navigation.navigate(Routes.SIGNUP);
@@ -35,27 +40,31 @@ const SignInForm = () => {
     navigation.navigate(Routes.PINCODE);
   }, [navigation]);
 
-  const onSubmit = async (data: signInValues) => {
-    try {
+  const mutation = useMutation({
+    mutationFn: async (data: signInValues) => {
       const response = await axios.post('https://dummyjson.com/user/login', {
         username: data.username,
         password: data.password,
       });
+      return response.data;
+    },
+    onSuccess: data => {
+      const {accessToken, ...userData} = data;
+      dispatch(login({token: accessToken, user: userData}));
+      navigateToPinCode();
+    },
+    onError: () => {
+      Alert.alert('Error', 'Login failed, please try again.');
+    },
+  });
 
-      const {accessToken} = response.data;
-
-      if (accessToken) {
-        navigateToPinCode();
-      } else {
-        Alert.alert('Error', 'Login failed, please try again.');
-      }
-    } catch (error) {
-      Alert.alert('Error', 'An error occurred, please try again.');
-    }
+  const onSubmit = async (data: signInValues) => {
+    mutation.mutate(data);
   };
 
   return (
-    <View style={AppStyles.formContainer}>
+    <View style={[AppStyles.formContainer, {position: 'relative'}]}>
+      {mutation.isPending && <Loader />}
       <Input
         label="Username"
         {...register('username')}

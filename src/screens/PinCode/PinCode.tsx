@@ -84,7 +84,7 @@ const KeyContainer: FC<KeyContainerProps> = ({pin}) => {
   );
 };
 
-const PinCodeScreen = () => {
+const PinCode = () => {
   const [pin, setPin] = useState<string>('');
 
   const onSubmit = () => {};
@@ -177,4 +177,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PinCodeScreen;
+export default PinCode;
