@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {AppStyles} from '../../utils/styles';
-import ScreenHeader from '../../components/ScreenHeader';
+import ScreenTitle from '../../components/ScreenTitle';
 import LanguageItem from './components/LanguageItem';
 import {useTranslation} from 'react-i18next';
 import i18next from 'i18next';
@@ -30,7 +30,7 @@ const Languages = () => {
 
   return (
     <View style={AppStyles.mainContainer}>
-      <ScreenHeader title={t('languages')} />
+      <ScreenTitle title={t('languages')} />
       {Object.entries(languageList).map(([code, language]) => (
         <LanguageItem
           key={code}
