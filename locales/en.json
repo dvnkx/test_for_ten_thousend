@@ -12,5 +12,10 @@
     "logout": "Logout",
     "languages": "Languages"
   },
-  "languages": "Language"
+  "languages": "Language",
+  "home": {
+    "header": "Your name",
+    "beforeYouStart": "Before You Start",
+    "posts": "Posts"
+  }
 }

@@ -20,6 +20,9 @@ export enum Routes {
 
   //Settings
   LANGUAGES = 'Languages',
+
+  //Post
+  POST = 'Post',
 }
 
 export type RoutesType = {
@@ -36,6 +39,8 @@ export type RoutesType = {
   Settings: {name: string} | undefined;
 
   Languages: {name: string} | undefined;
+
+  Post: {name: string} | undefined;
 };
 
 export type NavigationProps = StackNavigationProp<RoutesType>;

@@ -12,5 +12,10 @@
     "logout": "تسجيل الخروج",
     "languages": "اللغات"
   },
-  "languages": "لغة"
+  "languages": "لغة",
+  "home": {
+    "header": "اسمك",
+    "beforeYouStart": "قبل أن تبدأ",
+    "posts": "دعامات"
+  }
 }
