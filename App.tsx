@@ -10,7 +10,7 @@ import {Provider, useSelector} from 'react-redux';
 import store, {persistor, RootState} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Loader} from './src/components';
-import {Home, PinCode, SignIn, SignUp, Walkthrough} from './src/screens';
+import {PinCode, SignIn, SignUp, Tabs, Walkthrough} from './src/screens';
 
 enableScreens();
 
@@ -27,7 +27,7 @@ const AuthStack = () => (
 
 const MainStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name={Routes.HOME} component={Home} />
+    <Stack.Screen name={Routes.TABS} component={Tabs} />
   </Stack.Navigator>
 );
 
