@@ -25,4 +25,7 @@ export const ASSETS = {
 
   portfolio: require('../pictures/portfolio.png'),
   portfolioFocused: require('../pictures/portfolio-focus.png'),
+
+  // Others
+  chevronRight: require('../pictures/chevron-right.png'),
 };
