@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,15 +8,13 @@ import {
   Alert,
 } from 'react-native';
 import {ASSETS} from '../../utils/assets';
-import {Button} from '../../components';
+import {Button, IconContainer} from '../../components';
 import {AppColors} from '../../utils/colors';
-import IconContainer from '../../components/IconContainer';
 import {AppStyles} from '../../utils/styles';
-import {useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
-import {NavigationProps, Routes} from '../../utils/routes';
 import Keychain from 'react-native-keychain';
-import {RootState} from '../../redux/store';
+import {useDispatch} from 'react-redux';
+import {verify} from '../../redux/slices/verify.slice';
+import {StepType, TempPinType} from '../../types/pin.types';
 
 type KeyPadProps = {
   handleKeyPress: (value: string) => void;
@@ -97,16 +95,22 @@ const KeyContainer: FC<KeyContainerProps> = ({pin}) => {
 };
 
 const PinCode = () => {
+  const dispatch = useDispatch();
   const [pin, setPin] = useState<string>('');
-  const [step, setStep] = useState<'create' | 'confirm'>('create');
-  const [tempPin, setTempPin] = useState<string | null>(null);
-  const {token} = useSelector((state: RootState) => state.auth);
+  const [step, setStep] = useState<StepType>('verify');
+  const [tempPin, setTempPin] = useState<TempPinType>(null);
 
-  const navigation = useNavigation<NavigationProps>();
-
-  const navigateToHome = useCallback(() => {
-    navigation.navigate(Routes.HOME);
-  }, [navigation]);
+  useEffect(() => {
+    const checkExistingPin = async () => {
+      const credentials = await Keychain.getGenericPassword({
+        service: 'userPin',
+      });
+      if (!credentials) {
+        setStep('create');
+      }
+    };
+    checkExistingPin();
+  }, []);
 
   const handleKeyPress = (value: string) => {
     if (pin.length < 5) {
@@ -118,27 +122,43 @@ const PinCode = () => {
     setPin(prev => prev.slice(0, -1));
   };
 
+  const resetPinAndStep = (newStep: StepType) => {
+    setPin('');
+    setTempPin(null);
+    setStep(newStep);
+  };
+
   const onSubmit = async () => {
-    if (step === 'create') {
-      setTempPin(pin);
-      setPin('');
-      setStep('confirm');
-    } else if (step === 'confirm') {
-      if (pin === tempPin) {
-        if (token) {
-          await Keychain.setGenericPassword(pin, token, {
+    try {
+      if (step === 'create') {
+        setTempPin(pin);
+        setPin('');
+        setStep('confirm');
+      } else if (step === 'confirm') {
+        if (pin === tempPin) {
+          await Keychain.setGenericPassword('userPin', pin, {
             service: 'userPin',
           });
-          navigateToHome();
+          dispatch(verify());
+          resetPinAndStep('verify');
         } else {
-          Alert.alert('Error', 'Authentication token is missing.');
+          Alert.alert('Error', 'PIN codes do not match. Try again.');
+          resetPinAndStep('create');
         }
-      } else {
-        Alert.alert('Error', 'PIN codes do not match. Try again.');
-        setStep('create');
+      } else if (step === 'verify') {
+        const credentials = await Keychain.getGenericPassword({
+          service: 'userPin',
+        });
+
+        if (credentials && credentials?.password === pin) {
+          dispatch(verify());
+        } else {
+          Alert.alert('Error', 'Incorrect PIN. Try again.');
+          setPin('');
+        }
       }
-      setPin('');
-      setTempPin(null);
+    } catch (error) {
+      console.error('Error submitting PIN:', error);
     }
   };
 
@@ -147,9 +167,13 @@ const PinCode = () => {
       <View style={styles.content}>
         <IconContainer icon={ASSETS.smartphone} />
         <Text style={[AppStyles.title, {marginVertical: 15}]}>
-          {step === 'create' ? 'Create a PIN code' : 'Repeat a PIN code'}
+          {step === 'create'
+            ? 'Create a PIN code'
+            : step === 'confirm'
+            ? 'Repeat a PIN code'
+            : 'Enter your PIN code'}
         </Text>
-        <Text style={AppStyles.subtitle}>enter 5 digit code</Text>
+        <Text style={AppStyles.subtitle}>Enter 5 digit code</Text>
         <KeyContainer pin={pin} />
       </View>
 
