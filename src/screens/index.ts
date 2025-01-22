@@ -1,5 +1,10 @@
-export {default as Home} from './Home/Home.tsx';
 export {default as Walkthrough} from './Walkthrough/Walkthrough.tsx';
 export {default as SignIn} from './SignIn/SignIn.tsx';
 export {default as SignUp} from './SignUp/SignUp.tsx';
 export {default as PinCode} from './PinCode/PinCode.tsx';
+export {default as Tabs} from './Tabs/Tabs.tsx';
+export {default as Home} from './Home/Home.tsx';
+export {default as Portfolio} from './Portfolio/Portfolio.tsx';
+export {default as Search} from './Search/Search.tsx';
+export {default as Settings} from './Settings/Settings.tsx';
+export {default as Languages} from './Languages/Languages.tsx';

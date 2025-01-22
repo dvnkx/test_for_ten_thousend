@@ -10,7 +10,16 @@ import {Provider, useSelector} from 'react-redux';
 import store, {persistor, RootState} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Loader} from './src/components';
-import {Home, PinCode, SignIn, SignUp, Walkthrough} from './src/screens';
+import {
+  Languages,
+  PinCode,
+  SignIn,
+  SignUp,
+  Tabs,
+  Walkthrough,
+} from './src/screens';
+import i18next from './locales/i18next';
+import {I18nextProvider} from 'react-i18next';
 
 enableScreens();
 
@@ -27,11 +36,15 @@ const AuthStack = () => (
 
 const MainStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name={Routes.HOME} component={Home} />
+    <Stack.Screen name={Routes.TABS} component={Tabs} />
+    <Stack.Screen name={Routes.LANGUAGES} component={Languages} />
   </Stack.Navigator>
 );
 
 const RootNavigator = () => {
+  const userLocalization = useSelector(
+    (state: RootState) => state.auth.user?.localization,
+  );
   const {token} = useSelector((state: RootState) => state.auth);
   const verifyStatus = useSelector(
     (state: RootState) => state.verify.verifyStatus,
@@ -43,7 +56,10 @@ const RootNavigator = () => {
   useEffect(() => {
     setIsAuth(!!token);
     setIsVerified(verifyStatus);
-  }, [token, verifyStatus]);
+    if (userLocalization) {
+      i18next.changeLanguage(userLocalization);
+    }
+  }, [token, verifyStatus, userLocalization]);
 
   return (
     <NavigationContainer>
@@ -67,7 +83,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <PersistGate loading={<Loader />} persistor={persistor}>
-          <RootNavigator />
+          <I18nextProvider i18n={i18next}>
+            <RootNavigator />
+          </I18nextProvider>
         </PersistGate>
       </Provider>
     </QueryClientProvider>
