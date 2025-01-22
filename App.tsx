@@ -42,6 +42,9 @@ const MainStack = () => (
 );
 
 const RootNavigator = () => {
+  const userLocalization = useSelector(
+    (state: RootState) => state.auth.user?.localization,
+  );
   const {token} = useSelector((state: RootState) => state.auth);
   const verifyStatus = useSelector(
     (state: RootState) => state.verify.verifyStatus,
@@ -53,7 +56,10 @@ const RootNavigator = () => {
   useEffect(() => {
     setIsAuth(!!token);
     setIsVerified(verifyStatus);
-  }, [token, verifyStatus]);
+    if (userLocalization) {
+      i18next.changeLanguage(userLocalization);
+    }
+  }, [token, verifyStatus, userLocalization]);
 
   return (
     <NavigationContainer>

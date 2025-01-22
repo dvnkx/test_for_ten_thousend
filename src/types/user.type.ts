@@ -6,6 +6,7 @@ type UserType = {
   image: string;
   lastName: string;
   username: string;
+  localization: string;
 };
 
 export default UserType;

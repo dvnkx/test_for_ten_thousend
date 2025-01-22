@@ -47,7 +47,9 @@ const SignInForm = () => {
     onSuccess: data => {
       const {accessToken, refreshToken, ...userData} = data;
 
-      dispatch(login({token: accessToken, user: userData}));
+      const user = {...userData, localization: 'en'};
+
+      dispatch(login({token: accessToken, user}));
 
       navigateToPinCode();
     },
