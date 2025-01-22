@@ -1,6 +1,6 @@
 import {ASSETS} from '../utils/assets';
 
-export const homeData = [
+const walkthroughData = [
   {
     images: [ASSETS.bitcoin, ASSETS.instagram, ASSETS.linkedIn],
     title: 'Social Media Logos',
@@ -22,3 +22,5 @@ export const homeData = [
     title: 'Crypto & Social Apps',
   },
 ];
+
+export default walkthroughData;

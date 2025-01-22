@@ -3,7 +3,7 @@ import React, {useCallback} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
-import {homeData} from '../../db/homeData';
+import walkthroughData from '../../db/walkthroughData';
 import {NavigationProps, Routes} from '../../utils/routes';
 import {InfoBlock, IntroBlock} from './components';
 import {ASSETS} from '../../utils/assets';
@@ -25,7 +25,7 @@ const Walkthrough = () => {
         <View style={styles.gridRow}>
           <View style={styles.gridColumn}>
             <IntroBlock image={ASSETS.bitcoin} />
-            {homeData.slice(0, 2).map(data => (
+            {walkthroughData.slice(0, 2).map(data => (
               <InfoBlock
                 key={data.title}
                 images={data.images}
@@ -35,7 +35,7 @@ const Walkthrough = () => {
           </View>
 
           <View style={[styles.gridColumn, {marginTop: 40}]}>
-            {homeData.slice(2).map(data => (
+            {walkthroughData.slice(2).map(data => (
               <InfoBlock
                 key={data.title}
                 images={data.images}

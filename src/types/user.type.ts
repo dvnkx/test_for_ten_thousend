@@ -1,4 +1,4 @@
-export type UserType = {
+type UserType = {
   email: string;
   firstName: string;
   gender: string;
@@ -7,3 +7,5 @@ export type UserType = {
   lastName: string;
   username: string;
 };
+
+export default UserType;

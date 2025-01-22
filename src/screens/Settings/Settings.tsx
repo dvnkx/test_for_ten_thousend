@@ -10,6 +10,7 @@ import {NavigationProps, Routes} from '../../utils/routes';
 import Keychain from 'react-native-keychain';
 import {logout} from '../../redux/slices/auth.slice';
 import {verify} from '../../redux/slices/verify.slice';
+import {AppStyles} from '../../utils/styles';
 
 const User = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -68,7 +69,7 @@ const Logout = () => {
 
 const Settings = () => {
   return (
-    <View style={styles.container}>
+    <View style={AppStyles.mainContainer}>
       <ScreenHeader title="Settings" />
       <User />
       <Languages />
@@ -78,9 +79,6 @@ const Settings = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-  },
   userAvatar: {
     width: 40,
     height: 40,

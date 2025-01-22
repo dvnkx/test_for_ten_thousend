@@ -57,4 +57,8 @@ export const AppStyles = StyleSheet.create({
     marginTop: 50,
     width: '100%',
   },
+
+  mainContainer: {
+    margin: 20,
+  },
 });

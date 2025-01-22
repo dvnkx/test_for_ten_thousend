@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {UserType} from '../../types/user.type';
+import UserType from '../../types/user.type';
 
 type authSliceType = {
   token: string | null;

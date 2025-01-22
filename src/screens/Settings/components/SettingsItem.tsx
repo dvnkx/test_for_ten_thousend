@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
+  View,
 } from 'react-native';
 import {AppColors} from '../../../utils/colors';
 import {ASSETS} from '../../../utils/assets';
@@ -32,6 +33,16 @@ const SettingsItemComponents = {
   ),
   Chevron: () => {
     return <Image style={styles.chevron} source={ASSETS.chevronRight} />;
+  },
+  Checkbox: ({checked}: {checked: boolean}) => {
+    return (
+      <View
+        style={[
+          styles.containerCheckbox,
+          checked && {backgroundColor: AppColors.primary},
+        ]}
+      />
+    );
   },
 };
 
@@ -68,6 +79,17 @@ const styles = StyleSheet.create({
     height: 24,
     top: '60%',
     right: '5%',
+  },
+  containerCheckbox: {
+    position: 'absolute',
+    top: '60%',
+    right: '5%',
+    backgroundColor: AppColors.chinese_silver,
+    borderWidth: 1,
+    borderRadius: 50,
+    borderColor: AppColors.granite_gray,
+    width: 24,
+    height: 24,
   },
 });
 
