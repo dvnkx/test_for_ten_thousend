@@ -28,4 +28,6 @@ export const ASSETS = {
 
   // Others
   chevronRight: require('../pictures/chevron-right.png'),
+  language: require('../pictures/language.png'),
+  logout: require('../pictures/logout.png'),
 };

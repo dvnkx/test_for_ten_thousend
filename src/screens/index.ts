@@ -7,3 +7,4 @@ export {default as Home} from './Home/Home.tsx';
 export {default as Portfolio} from './Portfolio/Portfolio.tsx';
 export {default as Search} from './Search/Search.tsx';
 export {default as Settings} from './Settings/Settings.tsx';
+export {default as Languages} from './Languages/Languages.tsx';

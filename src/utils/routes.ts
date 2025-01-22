@@ -17,6 +17,9 @@ export enum Routes {
   PORTFOLIO = 'Portfolio',
   SEARCH = 'Search',
   SETTINGS = 'Settings',
+
+  //Settings
+  LANGUAGES = 'Languages',
 }
 
 export type RoutesType = {
@@ -31,6 +34,8 @@ export type RoutesType = {
   Portfolio: {name: string} | undefined;
   Search: {name: string} | undefined;
   Settings: {name: string} | undefined;
+
+  Languages: {name: string} | undefined;
 };
 
 export type NavigationProps = StackNavigationProp<RoutesType>;
