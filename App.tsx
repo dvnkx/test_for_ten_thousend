@@ -13,6 +13,7 @@ import {Loader} from './src/components';
 import {
   Languages,
   PinCode,
+  Post,
   SignIn,
   SignUp,
   Tabs,
@@ -38,6 +39,7 @@ const MainStack = () => (
   <Stack.Navigator>
     <Stack.Screen name={Routes.TABS} component={Tabs} />
     <Stack.Screen name={Routes.LANGUAGES} component={Languages} />
+    <Stack.Screen name={Routes.POST} component={Post} />
   </Stack.Navigator>
 );
 

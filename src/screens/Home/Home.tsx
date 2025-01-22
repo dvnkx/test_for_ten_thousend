@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {AppColors} from '../../utils/colors';
 import {useSelector} from 'react-redux';
@@ -12,6 +12,8 @@ import PostType from '../../types/post.type';
 import {Loader} from '../../components';
 import {beforeYouStartData, tasksData} from '../../db/homeData';
 import {useTranslation} from 'react-i18next';
+import {CommonActions, useNavigation} from '@react-navigation/native';
+import {NavigationProps, Routes} from '../../utils/routes';
 
 const HeaderSection = () => {
   const {t} = useTranslation();
@@ -34,7 +36,7 @@ const HeaderSection = () => {
 const TasksSection = () => (
   <HomeScrollView horizontal>
     {tasksData.map(task => (
-      <HomeComponent key={task.id}>
+      <HomeComponent disabled key={task.id}>
         <HomeComponent.Title>{task.title}</HomeComponent.Title>
         <HomeComponent.SubTitle>{task.subtitle}</HomeComponent.SubTitle>
         <HomeComponent.Button>{task.buttonText}</HomeComponent.Button>
@@ -50,7 +52,7 @@ const BeforeYouStart = () => {
       <ScreenSubtitle subtitle={t('home.beforeYouStart')} />
       <HomeScrollView horizontal>
         {beforeYouStartData.map(task => (
-          <HomeComponent key={task.id}>
+          <HomeComponent disabled key={task.id}>
             <HomeComponent.Title>{t(task.title)}</HomeComponent.Title>
             <HomeComponent.SubTitle>{t(task.subtitle)}</HomeComponent.SubTitle>
             <HomeComponent.Button>{t(task.buttonText)}</HomeComponent.Button>
@@ -64,6 +66,16 @@ const BeforeYouStart = () => {
 const PostsSection = () => {
   const {t} = useTranslation();
   const [randomStart, setRandomStart] = useState<number>(0);
+  const navigation = useNavigation<NavigationProps>();
+
+  const navigateToPost = useCallback(
+    (post: PostType) => {
+      navigation.dispatch(
+        CommonActions.navigate({name: Routes.POST, params: {...post}}),
+      );
+    },
+    [navigation],
+  );
 
   useEffect(() => {
     setRandomStart(Math.floor(Math.random() * 97));
@@ -88,7 +100,10 @@ const PostsSection = () => {
       <View style={styles.postContainer}>
         {data &&
           data.map(post => (
-            <HomeComponent style={styles.post} key={post.id}>
+            <HomeComponent
+              onPress={() => navigateToPost(post)}
+              style={styles.post}
+              key={post.id}>
               <HomeComponent.Title>{post.title}</HomeComponent.Title>
               <HomeComponent.SubTitle>{post.body}</HomeComponent.SubTitle>
             </HomeComponent>

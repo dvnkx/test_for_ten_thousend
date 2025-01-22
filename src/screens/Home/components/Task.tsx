@@ -4,19 +4,26 @@ import {
   Text,
   TextStyle,
   TouchableOpacity,
+  TouchableOpacityProps,
   View,
   ViewStyle,
 } from 'react-native';
 import {AppColors} from '../../../utils/colors';
 import {AppStyles} from '../../../utils/styles';
 
-type HomeBlockComponentProps = {
+type HomeBlockComponentProps = TouchableOpacityProps & {
   children: ReactNode;
   style?: ViewStyle;
 };
 
-const HomeBlockComponent: FC<HomeBlockComponentProps> = ({children, style}) => (
-  <View style={[styles.taskContainer, style]}>{children}</View>
+const HomeBlockComponent: FC<HomeBlockComponentProps> = ({
+  children,
+  style,
+  ...rest
+}) => (
+  <TouchableOpacity {...rest} style={[styles.taskContainer, style]}>
+    {children}
+  </TouchableOpacity>
 );
 
 const HomeItemComponents = {
