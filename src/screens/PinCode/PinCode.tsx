@@ -15,6 +15,7 @@ import Keychain from 'react-native-keychain';
 import {useDispatch} from 'react-redux';
 import {verify} from '../../redux/slices/verify.slice';
 import {StepType, TempPinType} from '../../types/pin.types';
+import {useTranslation} from 'react-i18next';
 
 type KeyPadProps = {
   handleKeyPress: (value: string) => void;
@@ -99,6 +100,7 @@ const PinCode = () => {
   const [pin, setPin] = useState<string>('');
   const [step, setStep] = useState<StepType>('verify');
   const [tempPin, setTempPin] = useState<TempPinType>(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
     const checkExistingPin = async () => {
@@ -153,7 +155,10 @@ const PinCode = () => {
         if (credentials && credentials?.password === pin) {
           dispatch(verify());
         } else {
-          Alert.alert('Error', 'Incorrect PIN. Try again.');
+          Alert.alert(
+            t('pinCode.error.error'),
+            t('pinCode.error.errorMessage'),
+          );
           setPin('');
         }
       }
@@ -171,9 +176,9 @@ const PinCode = () => {
             ? 'Create a PIN code'
             : step === 'confirm'
             ? 'Repeat a PIN code'
-            : 'Enter your PIN code'}
+            : t('pinCode.title')}
         </Text>
-        <Text style={AppStyles.subtitle}>Enter 5 digit code</Text>
+        <Text style={AppStyles.subtitle}>{t('pinCode.subtitle')}</Text>
         <KeyContainer pin={pin} />
       </View>
 

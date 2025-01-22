@@ -11,6 +11,7 @@ import Keychain from 'react-native-keychain';
 import {logout} from '../../redux/slices/auth.slice';
 import {verify} from '../../redux/slices/verify.slice';
 import {AppStyles} from '../../utils/styles';
+import {useTranslation} from 'react-i18next';
 
 const User = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -30,6 +31,7 @@ const User = () => {
 };
 
 const Languages = () => {
+  const {t} = useTranslation();
   const navigation = useNavigation<NavigationProps>();
 
   const navigateToLanguages = useCallback(() => {
@@ -39,13 +41,14 @@ const Languages = () => {
   return (
     <SettingsItem onPress={navigateToLanguages}>
       <SettingsItem.Image source={ASSETS.language} />
-      <SettingsItem.Text>Languages</SettingsItem.Text>
+      <SettingsItem.Text>{t('settings.languages')}</SettingsItem.Text>
       <SettingsItem.Chevron />
     </SettingsItem>
   );
 };
 
 const Logout = () => {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
 
   const handleLogout = useCallback(async () => {
@@ -61,16 +64,17 @@ const Logout = () => {
   return (
     <SettingsItem onPress={handleLogout}>
       <SettingsItem.Image source={ASSETS.logout} />
-      <SettingsItem.Text>Logout</SettingsItem.Text>
+      <SettingsItem.Text>{t('settings.logout')}</SettingsItem.Text>
       <SettingsItem.Chevron />
     </SettingsItem>
   );
 };
 
 const Settings = () => {
+  const {t} = useTranslation();
   return (
     <View style={AppStyles.mainContainer}>
-      <ScreenHeader title="Settings" />
+      <ScreenHeader title={t('settings.header')} />
       <User />
       <Languages />
       <Logout />

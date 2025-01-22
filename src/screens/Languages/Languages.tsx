@@ -30,7 +30,7 @@ const Languages = () => {
 
   return (
     <View style={AppStyles.mainContainer}>
-      <ScreenHeader title={t('settings')} />
+      <ScreenHeader title={t('languages')} />
       {Object.entries(languageList).map(([code, language]) => (
         <LanguageItem
           key={code}

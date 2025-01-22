@@ -1,3 +1,16 @@
 {
-  "settings": "Setting"
+  "pinCode": {
+    "title": "Enter your PIN code",
+    "subtitle": "Enter 5 digit code",
+    "error": {
+      "error": "Error",
+      "errorMessage": "Incorrect PIN. Try again."
+    }
+  },
+  "settings": {
+    "header": "Settings",
+    "logout": "Logout",
+    "languages": "Languages"
+  },
+  "languages": "Language"
 }

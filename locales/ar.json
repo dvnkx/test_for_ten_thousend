@@ -1,3 +1,16 @@
 {
-  "settings": "إعدادات"
+  "pinCode": {
+    "title": "أدخل رمز PIN الخاص بك",
+    "subtitle": "أدخل الرمز المكون من 5 أرقام",
+    "error": {
+      "error": "خطأ",
+      "errorMessage": "رقم التعريف الشخصي غير صحيح. حاول مرة أخرى."
+    }
+  },
+  "settings": {
+    "header": "إعدادات",
+    "logout": "تسجيل الخروج",
+    "languages": "اللغات"
+  },
+  "languages": "لغة"
 }
