@@ -12,11 +12,9 @@ import {Button} from '../../components';
 import {AppColors} from '../../utils/colors';
 import IconContainer from '../../components/IconContainer';
 import {AppStyles} from '../../utils/styles';
-import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps, Routes} from '../../utils/routes';
 import Keychain from 'react-native-keychain';
-import {RootState} from '../../redux/store';
 
 type KeyPadProps = {
   handleKeyPress: (value: string) => void;
@@ -100,7 +98,6 @@ const PinCode = () => {
   const [pin, setPin] = useState<string>('');
   const [step, setStep] = useState<'create' | 'confirm'>('create');
   const [tempPin, setTempPin] = useState<string | null>(null);
-  const {token} = useSelector((state: RootState) => state.auth);
 
   const navigation = useNavigation<NavigationProps>();
 
@@ -125,14 +122,11 @@ const PinCode = () => {
       setStep('confirm');
     } else if (step === 'confirm') {
       if (pin === tempPin) {
-        if (token) {
-          await Keychain.setGenericPassword(pin, token, {
-            service: 'userPin',
-          });
-          navigateToHome();
-        } else {
-          Alert.alert('Error', 'Authentication token is missing.');
-        }
+        await Keychain.setGenericPassword('userPin', pin, {
+          service: 'userPin',
+        });
+
+        navigateToHome();
       } else {
         Alert.alert('Error', 'PIN codes do not match. Try again.');
         setStep('create');

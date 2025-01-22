@@ -15,6 +15,8 @@ import store, {persistor, RootState} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import Home from './src/screens/Home/Home';
 import * as Keychain from 'react-native-keychain';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from './src/components/Loader';
 
 enableScreens();
 
@@ -36,10 +38,11 @@ const MainStack = () => (
 );
 
 const RootNavigator = () => {
-  const token = useSelector((state: RootState) => state.auth.token);
+  const {token, user} = useSelector((state: RootState) => state.auth);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(`Token: ${token}, user: ${user}`);
     const checkAuth = async () => {
       if (token) {
         setIsAuthenticated(true);
@@ -47,6 +50,17 @@ const RootNavigator = () => {
         setIsAuthenticated(false);
       }
     };
+
+    const checkAsyncStorage = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('persist:root');
+        console.log('Stored Data:', storedData);
+      } catch (error) {
+        console.log('Error reading AsyncStorage', error);
+      }
+    };
+
+    checkAsyncStorage();
 
     checkAuth();
   }, [token]);
@@ -62,7 +76,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Loader />} persistor={persistor}>
           <RootNavigator />
         </PersistGate>
       </Provider>
