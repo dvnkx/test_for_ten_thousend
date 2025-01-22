@@ -8,9 +8,8 @@ import {
   Alert,
 } from 'react-native';
 import {ASSETS} from '../../utils/assets';
-import {Button} from '../../components';
+import {Button, IconContainer} from '../../components';
 import {AppColors} from '../../utils/colors';
-import IconContainer from '../../components/IconContainer';
 import {AppStyles} from '../../utils/styles';
 import Keychain from 'react-native-keychain';
 import {useDispatch} from 'react-redux';

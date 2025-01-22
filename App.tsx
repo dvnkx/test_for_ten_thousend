@@ -4,17 +4,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {enableScreens} from 'react-native-screens';
 import {Routes, RoutesType} from './src/utils/routes';
 import {createStackNavigator} from '@react-navigation/stack';
-import SignUp from './src/screens/SignUp/SignUp';
-import Walkthrough from './src/screens/Walkthrough/Walkthrough';
-import SignIn from './src/screens/SignIn/SignIn';
-import PinCode from './src/screens/PinCode/PinCode';
 import {QueryClientProvider} from '@tanstack/react-query';
 import {queryClient} from './src/api/client';
 import {Provider, useSelector} from 'react-redux';
 import store, {persistor, RootState} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import Home from './src/screens/Home/Home';
-import Loader from './src/components/Loader';
+import {Loader} from './src/components';
+import {Home, PinCode, SignIn, SignUp, Walkthrough} from './src/screens';
 
 enableScreens();
 
