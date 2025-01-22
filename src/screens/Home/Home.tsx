@@ -9,7 +9,7 @@ import fetchPosts from '../../api/services/getPosts';
 import HomeScrollView from './components/HomeScrollView';
 import ScreenSubtitle from '../../components/ScreenSubtitle';
 import PostType from '../../types/post.type';
-import {Loader} from '../../components';
+import {Loader, ScreenHeader} from '../../components';
 import {beforeYouStartData, tasksData} from '../../db/homeData';
 import {useTranslation} from 'react-i18next';
 import {CommonActions, useNavigation} from '@react-navigation/native';
@@ -26,10 +26,10 @@ const HeaderSection = () => {
   const {firstName, lastName} = user;
 
   return (
-    <View style={styles.headerContainer}>
+    <ScreenHeader style={styles.headerContainer}>
       <Text style={styles.headerSubtitle}>{t('home.header')}</Text>
       <Text style={styles.headerName}>{firstName + ' ' + lastName}</Text>
-    </View>
+    </ScreenHeader>
   );
 };
 
@@ -133,14 +133,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   headerContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     height: '30%',
     backgroundColor: AppColors.primary,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
   },
   headerSubtitle: {
     color: AppColors.lotion,

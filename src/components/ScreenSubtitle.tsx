@@ -1,14 +1,17 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, TextStyle} from 'react-native';
 
 import {AppStyles} from '../utils/styles';
 
 type ScreenSubtitleProps = {
   subtitle: string;
+  style?: TextStyle;
 };
 
-const ScreenSubtitle: FC<ScreenSubtitleProps> = ({subtitle}) => {
-  return <Text style={[AppStyles.subtitle, styles.subtitle]}>{subtitle}</Text>;
+const ScreenSubtitle: FC<ScreenSubtitleProps> = ({subtitle, style}) => {
+  return (
+    <Text style={[AppStyles.subtitle, styles.subtitle, style]}>{subtitle}</Text>
+  );
 };
 
 const styles = StyleSheet.create({

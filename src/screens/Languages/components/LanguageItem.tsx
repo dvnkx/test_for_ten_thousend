@@ -1,3 +1,4 @@
+import React from 'react';
 import {ASSETS} from '../../../utils/assets';
 import SettingsItem from '../../Settings/components/SettingsItem';
 
