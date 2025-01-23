@@ -14,6 +14,7 @@ import {fetchPosts} from '../../api/services/getPosts.service';
 import {useTranslation} from 'react-i18next';
 import {useDebounce} from '../../hooks/useDebounce.hook';
 import Post from './components/Post';
+import {AppColors} from '../../utils/colors';
 
 type PostsProps = {
   search: string;
@@ -21,7 +22,6 @@ type PostsProps = {
 
 const Posts: FC<PostsProps> = ({search}) => {
   const debouncedSearch = useDebounce(search, 500);
-
   const {
     data,
     isLoading,
@@ -31,10 +31,16 @@ const Posts: FC<PostsProps> = ({search}) => {
     isFetchingNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ['posts'],
-    queryFn: fetchPosts,
+    queryKey: ['posts', `posts=${debouncedSearch}`],
+    queryFn: ({pageParam}) => {
+      if (debouncedSearch) {
+        return fetchPosts({pageParam: 0, search: debouncedSearch});
+      }
+      return fetchPosts({pageParam, search: ''});
+    },
     initialPageParam: 0,
     getNextPageParam: lastPage => lastPage.nextPage,
+    gcTime: 0,
   });
 
   if (isLoading) {
@@ -42,16 +48,19 @@ const Posts: FC<PostsProps> = ({search}) => {
   }
 
   if (isError) {
-    <Text>{error.message}</Text>;
+    <Text style={[styles.message, styles.error]}>{error.message}</Text>;
   }
 
   const handleLoadMore = () => {
-    if (hasNextPage && !isFetchingNextPage) {
+    if (hasNextPage && !isFetchingNextPage && !debouncedSearch) {
       fetchNextPage();
     }
   };
 
-  if (!data) return <Text>There are no posts</Text>;
+  if (!data || data.pages.flatMap(posts => posts.data).length === 0)
+    return (
+      <Text style={[styles.message, styles.empty]}>There are no posts</Text>
+    );
 
   return (
     <>
@@ -116,6 +125,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 20,
+  },
+  message: {
+    fontSize: 30,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  empty: {
+    color: AppColors.primary,
+  },
+  error: {
+    color: AppColors.error,
   },
 });
 
