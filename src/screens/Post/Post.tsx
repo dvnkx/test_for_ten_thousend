@@ -3,10 +3,11 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import PostType from '../../types/post.type';
 import {AppColors} from '../../utils/colors';
-import ScreenSubtitle from '../../components/ScreenSubtitle';
-import {ScreenHeader} from '../../components';
+import {ScreenHeader, ScreenSubtitle} from '../../components';
+import {useTranslation} from 'react-i18next';
 
 const Post = () => {
+  const {t} = useTranslation();
   const route = useRoute<RouteProp<{Post: PostType}>>();
   const {title, body} = route.params;
 
@@ -15,7 +16,7 @@ const Post = () => {
       <ScreenHeader>
         <Text style={styles.headerName}>{title}</Text>
       </ScreenHeader>
-      <ScreenSubtitle style={styles.subtitle} subtitle="About" />
+      <ScreenSubtitle style={styles.subtitle} subtitle={t('post')} />
       <View style={styles.bodyContainer}>
         <Text>{body}</Text>
       </View>

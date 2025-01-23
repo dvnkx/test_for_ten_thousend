@@ -1,19 +1,17 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {AppColors} from '../../utils/colors';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {HomeComponent} from './components/Task';
 import {useQuery} from '@tanstack/react-query';
-import fetchPosts from '../../api/services/getPosts';
+import {fetchPostsFrom} from '../../api/services/getPosts';
 import HomeScrollView from './components/HomeScrollView';
-import ScreenSubtitle from '../../components/ScreenSubtitle';
 import PostType from '../../types/post.type';
-import {Loader, ScreenHeader} from '../../components';
+import {Loader, ScreenHeader, ScreenSubtitle} from '../../components';
 import {beforeYouStartData, tasksData} from '../../db/homeData';
 import {useTranslation} from 'react-i18next';
-import {CommonActions, useNavigation} from '@react-navigation/native';
-import {NavigationProps, Routes} from '../../utils/routes';
+import Post from './components/Post';
 
 const HeaderSection = () => {
   const {t} = useTranslation();
@@ -66,23 +64,13 @@ const BeforeYouStart = () => {
 const PostsSection = () => {
   const {t} = useTranslation();
   const [randomStart, setRandomStart] = useState<number>(0);
-  const navigation = useNavigation<NavigationProps>();
-
-  const navigateToPost = useCallback(
-    (post: PostType) => {
-      navigation.dispatch(
-        CommonActions.navigate({name: Routes.POST, params: {...post}}),
-      );
-    },
-    [navigation],
-  );
 
   useEffect(() => {
     setRandomStart(Math.floor(Math.random() * 97));
   }, []);
 
   const {data, isLoading, isError} = useQuery<PostType[]>({
-    queryFn: () => fetchPosts(randomStart, 3),
+    queryFn: () => fetchPostsFrom(randomStart, 3),
     queryKey: ['homePosts'],
   });
 
@@ -100,13 +88,12 @@ const PostsSection = () => {
       <View style={styles.postContainer}>
         {data &&
           data.map(post => (
-            <HomeComponent
-              onPress={() => navigateToPost(post)}
-              style={styles.post}
-              key={post.id}>
-              <HomeComponent.Title>{post.title}</HomeComponent.Title>
-              <HomeComponent.SubTitle>{post.body}</HomeComponent.SubTitle>
-            </HomeComponent>
+            <Post
+              id={post.id}
+              userId={post.userId}
+              title={post.title}
+              body={post.body}
+            />
           ))}
       </View>
     </>
@@ -148,9 +135,6 @@ const styles = StyleSheet.create({
   },
   postContainer: {
     marginHorizontal: 10,
-  },
-  post: {
-    width: '100%',
   },
 });
 

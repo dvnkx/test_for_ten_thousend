@@ -8,7 +8,7 @@
     }
   },
   "settings": {
-    "header": "إعدادات",
+    "title": "إعدادات",
     "logout": "تسجيل الخروج",
     "languages": "اللغات"
   },
@@ -17,5 +17,14 @@
     "header": "اسمك",
     "beforeYouStart": "قبل أن تبدأ",
     "posts": "دعامات"
+  },
+  "post": "عن",
+  "posts": {
+    "id": "بطاقة تعريف",
+    "name": "اسم"
+  },
+  "search": {
+    "title": "يبحث",
+    "placeholder": "بحث في المشاركات..."
   }
 }

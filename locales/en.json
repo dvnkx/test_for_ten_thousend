@@ -8,7 +8,7 @@
     }
   },
   "settings": {
-    "header": "Settings",
+    "title": "Settings",
     "logout": "Logout",
     "languages": "Languages"
   },
@@ -17,5 +17,14 @@
     "header": "Your name",
     "beforeYouStart": "Before You Start",
     "posts": "Posts"
+  },
+  "post": "About",
+  "posts": {
+    "id": "ID",
+    "name": "Name"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search posts..."
   }
 }

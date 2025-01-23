@@ -1,18 +1,26 @@
 import React, {forwardRef} from 'react';
-import {StyleSheet, Text, TextInput, View, TextInputProps} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TextInputProps,
+  ViewStyle,
+} from 'react-native';
 import {AppColors} from '../utils/colors';
 
 interface InputProps extends TextInputProps {
   errorMessage?: string;
   label?: string;
+  style?: ViewStyle;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
   ({errorMessage, label, style, ...rest}, ref) => {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         {!!label && <Text style={styles.label}>{label}</Text>}
-        <TextInput ref={ref} style={[styles.input, style]} {...rest} />
+        <TextInput ref={ref} style={styles.input} {...rest} />
         {!!errorMessage && (
           <Text style={styles.errorMessage}>{errorMessage}</Text>
         )}
@@ -23,11 +31,10 @@ const Input = forwardRef<TextInput, InputProps>(
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    width: '90%',
+    width: '100%',
   },
   label: {
-    marginBottom: 8,
+    marginVertical: 10,
     fontSize: 16,
     color: AppColors.dark_charcoal,
   },

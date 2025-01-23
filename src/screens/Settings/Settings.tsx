@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
-import ScreenTitle from '../../components/ScreenTitle';
+import {ScreenTitle} from '../../components';
 import SettingsItem from './components/SettingsItem';
 import {ASSETS} from '../../utils/assets';
 import {useDispatch, useSelector} from 'react-redux';
@@ -74,7 +74,7 @@ const Settings = () => {
   const {t} = useTranslation();
   return (
     <View style={AppStyles.mainContainer}>
-      <ScreenTitle title={t('settings.header')} />
+      <ScreenTitle title={t('settings.title')} />
       <User />
       <Languages />
       <Logout />

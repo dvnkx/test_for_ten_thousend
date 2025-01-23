@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const fetchPosts = async (start: number, limit: number) => {
+export const fetchPostsFrom = async (start: number, limit: number) => {
   const {data} = await axios.get('https://jsonplaceholder.typicode.com/posts', {
     params: {
       _start: start,
@@ -10,4 +10,12 @@ const fetchPosts = async (start: number, limit: number) => {
   return data;
 };
 
-export default fetchPosts;
+export const fetchSearchPosts = async (search: string = '') => {
+  const {data} = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+    params: {
+      title_like: search,
+      _limit: 10,
+    },
+  });
+  return data;
+};

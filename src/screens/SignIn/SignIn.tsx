@@ -1,6 +1,5 @@
 import React from 'react';
 import {View} from 'react-native';
-
 import UserSection from '../../components/UserSection';
 import SignInForm from './components/SignInForm';
 import {AppStyles} from '../../utils/styles';
