@@ -21,6 +21,7 @@ import {
 } from './src/screens';
 import i18next from './locales/i18next';
 import {I18nextProvider} from 'react-i18next';
+import BootSplash from 'react-native-bootsplash';
 
 enableScreens();
 
@@ -54,6 +55,13 @@ const RootNavigator = () => {
 
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  useEffect(() => {
+    const init = async () => {};
+    init().finally(async () => {
+      await BootSplash.hide({fade: true});
+    });
+  }, []);
 
   useEffect(() => {
     setIsAuth(!!token);
