@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {AppStyles} from '../../utils/styles';
 import {ScreenTitle} from '../../components';
 import {useTranslation} from 'react-i18next';

@@ -34,7 +34,7 @@ const Walkthrough = () => {
             ))}
           </View>
 
-          <View style={[styles.gridColumn, {marginTop: 40}]}>
+          <View style={[styles.gridColumn, styles.column]}>
             {walkthroughData.slice(2).map(data => (
               <InfoBlock
                 key={data.title}
@@ -88,6 +88,9 @@ const styles = StyleSheet.create({
   gridColumn: {
     flex: 1,
     marginHorizontal: 8,
+  },
+  column: {
+    marginTop: 40,
   },
 });
 

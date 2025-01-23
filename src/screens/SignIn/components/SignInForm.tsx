@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {useForm} from 'react-hook-form';
-import {Alert, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {AppColors} from '../../../utils/colors';
 import {Button, Input, Loader} from '../../../components';
@@ -44,6 +44,7 @@ const SignInForm = () => {
       return loginUser(data.username, data.password);
     },
     onSuccess: data => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const {accessToken, refreshToken, ...userData} = data;
 
       const user = {...userData, localization: 'en'};
@@ -62,7 +63,7 @@ const SignInForm = () => {
   };
 
   return (
-    <View style={[AppStyles.formContainer, {position: 'relative'}]}>
+    <View style={AppStyles.formContainer}>
       {mutation.isPending && <Loader />}
       <Input
         label="Username"
@@ -81,7 +82,7 @@ const SignInForm = () => {
         errorMessage={errors.password?.message}
         placeholder="Password..."
       />
-      <View style={[AppStyles.formButtons, {marginTop: 150, gap: 15}]}>
+      <View style={[AppStyles.formButtons, styles.button]}>
         <Button
           title="Continue"
           backgroundColor={AppColors.primary}
@@ -92,5 +93,12 @@ const SignInForm = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 150,
+    gap: 15,
+  },
+});
 
 export default SignInForm;

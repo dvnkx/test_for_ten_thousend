@@ -171,7 +171,7 @@ const PinCode = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <IconContainer icon={ASSETS.smartphone} />
-        <Text style={[AppStyles.title, {marginVertical: 15}]}>
+        <Text style={[AppStyles.title, styles.title]}>
           {step === 'create'
             ? 'Create a PIN code'
             : step === 'confirm'
@@ -206,7 +206,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-
+  title: {
+    marginVertical: 15,
+  },
   pinContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

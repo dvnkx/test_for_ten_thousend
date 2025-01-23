@@ -71,7 +71,7 @@ const Search = () => {
   }, []);
   return (
     <ScrollView
-      contentContainerStyle={{justifyContent: 'center'}}
+      contentContainerStyle={styles.containerContent}
       style={styles.container}>
       <ScreenTitle title={t('search.title')} />
       <Input

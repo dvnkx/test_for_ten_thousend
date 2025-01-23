@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useCallback} from 'react';
 import {Routes, RoutesType} from '../../utils/routes';
-import {Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {ASSETS} from '../../utils/assets';
 import {Home, Portfolio, Search, Settings} from '../';
 import {AssetIcons, AssetMap, GetIconProps} from '../../types/tabs.types';
@@ -15,7 +15,7 @@ const getIcon = (iconName: AssetIcons) => {
     return (
       <Image
         source={ASSETS[iconKey]}
-        style={{width: size, height: size, marginTop: 20}}
+        style={[styles.icon, {width: size, height: size}]}
       />
     );
   };
@@ -56,5 +56,11 @@ const Tabs = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    marginTop: 20,
+  },
+});
 
 export default Tabs;
