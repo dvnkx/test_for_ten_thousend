@@ -12,7 +12,7 @@ import PostType from '../../types/post.type';
 import Post from './components/Post';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useTranslation} from 'react-i18next';
-import {useDebounce} from '../../hooks/useDebounce';
+import {useDebounce} from '../../hooks/useDebounce.hook';
 
 type PostsProps = {
   search: string;
