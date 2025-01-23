@@ -74,7 +74,7 @@ const Settings = () => {
   const {t} = useTranslation();
   return (
     <View style={AppStyles.mainContainer}>
-      <ScreenTitle title={t('settings.header')} />
+      <ScreenTitle title={t('settings.title')} />
       <User />
       <Languages />
       <Logout />

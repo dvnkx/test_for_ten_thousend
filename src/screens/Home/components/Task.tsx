@@ -5,7 +5,6 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  View,
   ViewStyle,
 } from 'react-native';
 import {AppColors} from '../../../utils/colors';
@@ -60,9 +59,6 @@ const styles = StyleSheet.create({
 
     marginVertical: 10,
     borderRadius: 10,
-    shadowColor: AppColors.shadow,
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
   },
   goToCall: {
     marginTop: 10,

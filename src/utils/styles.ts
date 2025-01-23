@@ -49,6 +49,7 @@ export const AppStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: 16,
+    paddingHorizontal: 20,
   },
   formButtons: {
     display: 'flex',
@@ -60,5 +61,8 @@ export const AppStyles = StyleSheet.create({
 
   mainContainer: {
     margin: 20,
+  },
+  maxWidth: {
+    width: '100%',
   },
 });
