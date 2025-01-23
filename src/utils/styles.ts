@@ -1,22 +1,26 @@
 import {StyleSheet} from 'react-native';
 import {AppColors} from './colors';
 
+export enum AppStyleValues {
+  maxWidth = '100%',
+  maxHeight = '100%',
+}
+
 export const AppStyles = StyleSheet.create({
   blockContainer: {
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     backgroundColor: AppColors.lotion,
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
     shadowColor: AppColors.shadow,
-    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
     marginBottom: 16,
   },
 
   authWrapper: {
-    height: '100%',
+    height: AppStyleValues.maxHeight,
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -24,7 +28,7 @@ export const AppStyles = StyleSheet.create({
   authContainer: {
     display: 'flex',
     alignItems: 'center',
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     height: '80%',
     backgroundColor: AppColors.lotion,
     borderTopLeftRadius: 30,
@@ -32,18 +36,18 @@ export const AppStyles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
     color: AppColors.dark_charcoal,
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: 16,
     color: AppColors.granite_gray,
     marginTop: 4,
   },
 
   formContainer: {
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -52,17 +56,12 @@ export const AppStyles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   formButtons: {
+    width: AppStyleValues.maxWidth,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
-    width: '100%',
   },
-
-  mainContainer: {
-    margin: 20,
-  },
-  maxWidth: {
-    width: '100%',
-  },
+  mainContainer: {margin: 20},
+  itemWidth: {width: AppStyleValues.maxWidth},
 });

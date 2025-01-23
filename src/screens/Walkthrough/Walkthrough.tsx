@@ -7,6 +7,7 @@ import walkthroughData from '../../db/walkthroug.data';
 import {NavigationProps, Routes} from '../../utils/routes';
 import {InfoBlock, IntroBlock} from './components';
 import {ASSETS} from '../../utils/assets';
+import {AppStyleValues} from '../../utils/styles';
 
 const Column1 = () => (
   <View style={styles.columnContainer}>
@@ -85,12 +86,12 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     marginBottom: 16,
   },
   row: {
     flexDirection: 'row',
-    width: '100%',
+    width: AppStyleValues.maxWidth,
   },
   columnContainer: {
     flex: 1,

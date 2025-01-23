@@ -23,7 +23,7 @@ const Post = ({userId, id, body, title}: PostType) => {
   return (
     <HomeComponent
       onPress={() => navigateToPost({userId, id, body, title})}
-      style={AppStyles.maxWidth}
+      style={AppStyles.itemWidth}
       key={id}>
       <HomeComponent.Title>
         {t('posts.id')}: {id}

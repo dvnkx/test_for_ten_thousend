@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Image, ImageSourcePropType, StyleSheet, View} from 'react-native';
-import {AppStyles} from '../../../utils/styles';
+import {AppStyles, AppStyleValues} from '../../../utils/styles';
 
 type IntroBlockProps = {
   image: ImageSourcePropType;
@@ -16,7 +16,7 @@ const IntroBlock: FC<IntroBlockProps> = ({image}) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     height: 100,
   },
 });

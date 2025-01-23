@@ -6,7 +6,7 @@ import {AppColors} from '../../utils/colors';
 import {Button, ScreenHeader, ScreenSubtitle} from '../../components';
 import {useTranslation} from 'react-i18next';
 import {NavigationProps} from '../../utils/routes';
-import {AppStyles} from '../../utils/styles';
+import {AppStyleValues} from '../../utils/styles';
 
 const Post = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -20,7 +20,7 @@ const Post = () => {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader style={AppStyles.maxWidth}>
+      <ScreenHeader style={styles.headerContainer}>
         <Text style={styles.headerName}>{title}</Text>
       </ScreenHeader>
       <View style={styles.content}>
@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  headerContainer: {
+    width: AppStyleValues.maxWidth,
   },
   headerSubtitle: {
     fontSize: 16,

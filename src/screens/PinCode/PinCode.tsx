@@ -10,7 +10,7 @@ import {
 import {ASSETS} from '../../utils/assets';
 import {Button, IconContainer} from '../../components';
 import {AppColors} from '../../utils/colors';
-import {AppStyles} from '../../utils/styles';
+import {AppStyles, AppStyleValues} from '../../utils/styles';
 import Keychain from 'react-native-keychain';
 import {useDispatch} from 'react-redux';
 import {verify} from '../../redux/slices/verify.slice';
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   },
   keypad: {
     marginTop: 150,
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: AppColors.chinese_silver,
