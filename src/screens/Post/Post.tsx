@@ -3,8 +3,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import PostType from '../../types/post.type';
 import {AppColors} from '../../utils/colors';
-import ScreenSubtitle from '../../components/ScreenSubtitle';
-import {ScreenHeader} from '../../components';
+import {ScreenHeader, ScreenSubtitle} from '../../components';
 
 const Post = () => {
   const route = useRoute<RouteProp<{Post: PostType}>>();

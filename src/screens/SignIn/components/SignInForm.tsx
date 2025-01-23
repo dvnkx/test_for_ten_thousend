@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {Alert, View} from 'react-native';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {AppColors} from '../../../utils/colors';
-import {Button, Input} from '../../../components';
+import {Button, Input, Loader} from '../../../components';
 import {signInSchema, signInValues} from '../../../schemas/signIn.schema';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps, Routes} from '../../../utils/routes';
@@ -11,7 +11,6 @@ import {AppStyles} from '../../../utils/styles';
 import {useDispatch} from 'react-redux';
 import {login} from '../../../redux/slices/auth.slice';
 import {useMutation} from '@tanstack/react-query';
-import Loader from '../../../components/Loader';
 import loginUser from '../../../api/services/login';
 
 const SignInForm = () => {

@@ -48,6 +48,7 @@ export const beforeYouStartData = [
     buttonText: 'Set Goals',
   },
   {
+    id: 4,
     title: 'Time Management',
     subtitle: 'Ensure you allocate sufficient time for the task completion.',
     buttonText: 'Manage Time',
