@@ -26,5 +26,8 @@
   "search": {
     "title": "Search",
     "placeholder": "Search posts..."
+  },
+  "portfolio": {
+    "title": "Portfolio"
   }
 }
