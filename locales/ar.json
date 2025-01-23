@@ -26,5 +26,8 @@
   "search": {
     "title": "يبحث",
     "placeholder": "بحث في المشاركات..."
+  },
+  "portfolio": {
+    "title": "مَلَفّ"
   }
 }
