@@ -31,6 +31,8 @@ export const fetchPosts = async ({
   });
 
   const nextPage =
-    search || pageParam + LIMIT >= TOTAL ? null : pageParam + LIMIT;
+    pageParam + Number(LIMIT) < Number(TOTAL)
+      ? pageParam + Number(LIMIT)
+      : null;
   return {data, nextPage};
 };
