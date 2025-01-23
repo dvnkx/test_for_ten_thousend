@@ -14,6 +14,7 @@ export const fetchSearchPosts = async (search: string = '') => {
   const {data} = await axios.get('https://jsonplaceholder.typicode.com/posts', {
     params: {
       title_like: search,
+      _limit: 10,
     },
   });
   return data;
