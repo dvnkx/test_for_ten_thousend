@@ -1,8 +1,9 @@
 import axios from 'axios';
+import {AUTH_API} from '@env';
 
 const loginUser = async (username: string, password: string) => {
   try {
-    const response = await axios.post('https://dummyjson.com/user/login', {
+    const response = await axios.post(`${AUTH_API}`, {
       username,
       password,
     });
