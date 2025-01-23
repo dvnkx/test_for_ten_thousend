@@ -28,7 +28,6 @@ const UserSection: FC<UserSectionProps> = ({title}) => {
 const styles = StyleSheet.create({
   user: {
     width: AppStyleValues.maxWidth,
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     paddingVertical: 10,

@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {AppColors} from '../../utils/colors';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
-import {HomeComponent} from './components/Task';
+import {BlockComponent} from './components/Block';
 import {useQuery} from '@tanstack/react-query';
 import {fetchPostsFrom} from '../../api/services/getPosts.service';
 import HomeScrollView from './components/HomeScrollView';
@@ -34,11 +34,11 @@ const HeaderSection = () => {
 const TasksSection = () => (
   <HomeScrollView horizontal>
     {tasksData.map(task => (
-      <HomeComponent disabled key={task.id}>
-        <HomeComponent.Title>{task.title}</HomeComponent.Title>
-        <HomeComponent.SubTitle>{task.subtitle}</HomeComponent.SubTitle>
-        <HomeComponent.Button>{task.buttonText}</HomeComponent.Button>
-      </HomeComponent>
+      <BlockComponent disabled key={task.id}>
+        <BlockComponent.Title>{task.title}</BlockComponent.Title>
+        <BlockComponent.SubTitle>{task.subtitle}</BlockComponent.SubTitle>
+        <BlockComponent.Button>{task.buttonText}</BlockComponent.Button>
+      </BlockComponent>
     ))}
   </HomeScrollView>
 );
@@ -50,11 +50,13 @@ const BeforeYouStart = () => {
       <ScreenSubtitle subtitle={t('home.beforeYouStart')} />
       <HomeScrollView horizontal>
         {beforeYouStartData.map(task => (
-          <HomeComponent disabled key={task.id}>
-            <HomeComponent.Title>{t(task.title)}</HomeComponent.Title>
-            <HomeComponent.SubTitle>{t(task.subtitle)}</HomeComponent.SubTitle>
-            <HomeComponent.Button>{t(task.buttonText)}</HomeComponent.Button>
-          </HomeComponent>
+          <BlockComponent disabled key={task.id}>
+            <BlockComponent.Title>{t(task.title)}</BlockComponent.Title>
+            <BlockComponent.SubTitle>
+              {t(task.subtitle)}
+            </BlockComponent.SubTitle>
+            <BlockComponent.Button>{t(task.buttonText)}</BlockComponent.Button>
+          </BlockComponent>
         ))}
       </HomeScrollView>
     </>

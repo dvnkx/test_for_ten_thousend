@@ -20,7 +20,6 @@ const HomeScrollView: FC<HomeScrollViewProps> = ({children, ...rest}) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     paddingHorizontal: 10,
     minHeight: 120,
   },

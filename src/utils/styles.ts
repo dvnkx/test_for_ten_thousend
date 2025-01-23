@@ -21,12 +21,10 @@ export const AppStyles = StyleSheet.create({
 
   authWrapper: {
     height: AppStyleValues.maxHeight,
-    display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
   authContainer: {
-    display: 'flex',
     alignItems: 'center',
     width: AppStyleValues.maxWidth,
     height: '80%',
@@ -48,7 +46,6 @@ export const AppStyles = StyleSheet.create({
 
   formContainer: {
     width: AppStyleValues.maxWidth,
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -57,7 +54,6 @@ export const AppStyles = StyleSheet.create({
   },
   formButtons: {
     width: AppStyleValues.maxWidth,
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,

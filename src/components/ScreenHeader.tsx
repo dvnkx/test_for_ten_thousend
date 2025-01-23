@@ -13,7 +13,6 @@ const ScreenHeader: FC<ScreenHeaderProps> = ({children, style}) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

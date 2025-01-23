@@ -2,7 +2,7 @@ import {CommonActions, useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {NavigationProps, Routes} from '../../../utils/routes';
 import PostType from '../../../types/post.type';
-import HomeComponent from '../../Home/components/Task';
+import BlockComponent from '../../Home/components/Block';
 import {useTranslation} from 'react-i18next';
 import {AppStyles} from '../../../utils/styles';
 
@@ -21,17 +21,17 @@ const Post = ({userId, id, body, title}: PostType) => {
   );
 
   return (
-    <HomeComponent
+    <BlockComponent
       onPress={() => navigateToPost({userId, id, body, title})}
       style={AppStyles.itemWidth}
       key={id}>
-      <HomeComponent.Title>
+      <BlockComponent.Title>
         {t('posts.id')}: {id}
-      </HomeComponent.Title>
-      <HomeComponent.SubTitle>
+      </BlockComponent.Title>
+      <BlockComponent.SubTitle>
         {t('posts.name')}: {title}
-      </HomeComponent.SubTitle>
-    </HomeComponent>
+      </BlockComponent.SubTitle>
+    </BlockComponent>
   );
 };
 

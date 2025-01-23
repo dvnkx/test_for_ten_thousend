@@ -15,7 +15,7 @@ type HomeBlockComponentProps = TouchableOpacityProps & {
   style?: ViewStyle;
 };
 
-const HomeBlockComponent: FC<HomeBlockComponentProps> = ({
+const BlockContainerComponent: FC<HomeBlockComponentProps> = ({
   children,
   style,
   ...rest
@@ -25,7 +25,7 @@ const HomeBlockComponent: FC<HomeBlockComponentProps> = ({
   </TouchableOpacity>
 );
 
-const HomeItemComponents = {
+const BlockComponents = {
   Title: ({children}: {children: ReactNode}) => (
     <Text numberOfLines={1} ellipsizeMode="tail" style={AppStyles.title}>
       {children}
@@ -43,14 +43,13 @@ const HomeItemComponents = {
   ),
 };
 
-export const HomeComponent = Object.assign(
-  HomeBlockComponent,
-  HomeItemComponents,
+export const BlockComponent = Object.assign(
+  BlockContainerComponent,
+  BlockComponents,
 );
 
 const styles = StyleSheet.create({
   taskContainer: {
-    display: 'flex',
     justifyContent: 'center',
     width: 200,
     height: 100,
@@ -66,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeComponent;
+export default BlockComponent;
