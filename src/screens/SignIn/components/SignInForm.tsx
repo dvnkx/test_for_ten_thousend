@@ -11,7 +11,7 @@ import {AppStyles} from '../../../utils/styles';
 import {useDispatch} from 'react-redux';
 import {login} from '../../../redux/slices/auth.slice';
 import {useMutation} from '@tanstack/react-query';
-import loginUser from '../../../api/services/login';
+import loginUser from '../../../api/services/login.service';
 
 const SignInForm = () => {
   const {

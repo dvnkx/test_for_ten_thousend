@@ -5,11 +5,11 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {HomeComponent} from './components/Task';
 import {useQuery} from '@tanstack/react-query';
-import {fetchPostsFrom} from '../../api/services/getPosts';
+import {fetchPostsFrom} from '../../api/services/getPosts.service';
 import HomeScrollView from './components/HomeScrollView';
 import PostType from '../../types/post.type';
 import {Loader, ScreenHeader, ScreenSubtitle} from '../../components';
-import {beforeYouStartData, tasksData} from '../../db/homeData';
+import {beforeYouStartData, tasksData} from '../../db/home.data';
 import {useTranslation} from 'react-i18next';
 import Post from './components/Post';
 

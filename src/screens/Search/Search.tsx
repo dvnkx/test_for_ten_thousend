@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {Input, Loader, ScreenTitle} from '../../components';
 import {useQuery} from '@tanstack/react-query';
-import {fetchSearchPosts} from '../../api/services/getPosts';
+import {fetchSearchPosts} from '../../api/services/getPosts.service';
 import PostType from '../../types/post.type';
 import Post from './components/Post';
 import {ScrollView} from 'react-native-gesture-handler';
