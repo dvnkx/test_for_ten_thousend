@@ -1,17 +1,34 @@
-import React, {useEffect, useRef} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import React, {FC, useEffect, useRef, useState} from 'react';
+import {
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInput,
+  TextInputChangeEventData,
+} from 'react-native';
 import {Input, Loader, ScreenTitle} from '../../components';
 import {useQuery} from '@tanstack/react-query';
-import fetchPosts from '../../api/services/getPosts';
+import {fetchSearchPosts} from '../../api/services/getPosts';
 import PostType from '../../types/post.type';
 import Post from './components/Post';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useTranslation} from 'react-i18next';
+import {useDebounce} from '../../hooks/useDebounce';
 
-const Posts = () => {
+type PostsProps = {
+  search: string;
+};
+
+const Posts: FC<PostsProps> = ({search}) => {
+  const debouncedSearch = useDebounce(search, 500);
   const {data, isLoading, isError} = useQuery<PostType[]>({
-    queryFn: () => fetchPosts(0, 10),
-    queryKey: ['searchPosts'],
+    queryFn: () => {
+      if (debouncedSearch) {
+        return fetchSearchPosts(debouncedSearch);
+      } else {
+        return fetchSearchPosts('');
+      }
+    },
+    queryKey: ['searchPosts', debouncedSearch],
   });
 
   if (isLoading) {
@@ -39,8 +56,13 @@ const Posts = () => {
 };
 
 const Search = () => {
+  const [search, setSearch] = useState('');
   const {t} = useTranslation();
   const inputRef = useRef<TextInput>(null);
+
+  const handleSearch = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    setSearch(e.nativeEvent.text);
+  };
 
   useEffect(() => {
     if (inputRef.current) {
@@ -53,11 +75,13 @@ const Search = () => {
       style={styles.container}>
       <ScreenTitle title={t('search.title')} />
       <Input
+        value={search}
+        onChange={handleSearch}
         ref={inputRef}
         placeholder={t('search.placeholder')}
         style={styles.inputContainer}
       />
-      <Posts />
+      <Posts search={search} />
     </ScrollView>
   );
 };

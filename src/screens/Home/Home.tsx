@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {HomeComponent} from './components/Task';
 import {useQuery} from '@tanstack/react-query';
-import fetchPosts from '../../api/services/getPosts';
+import {fetchPostsWithStart} from '../../api/services/getPosts';
 import HomeScrollView from './components/HomeScrollView';
 import PostType from '../../types/post.type';
 import {Loader, ScreenHeader, ScreenSubtitle} from '../../components';
@@ -70,7 +70,7 @@ const PostsSection = () => {
   }, []);
 
   const {data, isLoading, isError} = useQuery<PostType[]>({
-    queryFn: () => fetchPosts(randomStart, 3),
+    queryFn: () => fetchPostsWithStart(randomStart, 3),
     queryKey: ['homePosts'],
   });
 
