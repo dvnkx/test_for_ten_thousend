@@ -87,9 +87,10 @@ const PostsSection = () => {
       <ScreenSubtitle subtitle={t('home.posts')} />
       <View style={styles.postContainer}>
         {data &&
-          data.map(post => (
+          data.map((post, i) => (
             <Post
-              id={post.id}
+              key={`${post.userId}-${post.title}`}
+              id={i}
               userId={post.userId}
               title={post.title}
               body={post.body}
