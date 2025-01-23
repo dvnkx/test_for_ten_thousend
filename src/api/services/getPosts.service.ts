@@ -1,5 +1,9 @@
 import axios from 'axios';
 import {POSTS_API} from '@env';
+import PostType from '../../types/post.type';
+
+const LIMIT = 10;
+const TOTAL = 100;
 
 export const fetchPostsFrom = async (start: number, limit: number) => {
   const {data} = await axios.get(`${POSTS_API}`, {
@@ -11,12 +15,19 @@ export const fetchPostsFrom = async (start: number, limit: number) => {
   return data;
 };
 
-export const fetchSearchPosts = async (search: string = '') => {
+export const fetchPosts = async ({
+  pageParam,
+}: {
+  pageParam: number;
+}): Promise<{
+  data: PostType[];
+  nextPage: number | null;
+}> => {
   const {data} = await axios.get(`${POSTS_API}`, {
     params: {
-      title_like: search,
-      _limit: 10,
+      _start: pageParam,
+      _limit: LIMIT,
     },
   });
-  return data;
+  return {data, nextPage: pageParam + LIMIT < TOTAL ? pageParam + LIMIT : null};
 };
