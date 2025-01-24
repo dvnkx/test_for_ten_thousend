@@ -10,11 +10,7 @@ type HomeScrollViewProps = ScrollViewProps & {
 const HomeScrollView: FC<HomeScrollViewProps> = ({children, ...rest}) => {
   return (
     <ScrollView
-      contentContainerStyle={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 10,
-      }}
+      contentContainerStyle={styles.containerContent}
       style={styles.container}
       {...rest}>
       {children}
@@ -24,9 +20,13 @@ const HomeScrollView: FC<HomeScrollViewProps> = ({children, ...rest}) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     paddingHorizontal: 10,
     minHeight: 120,
+  },
+  containerContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
   },
 });
 

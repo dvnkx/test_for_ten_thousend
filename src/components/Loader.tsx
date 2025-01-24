@@ -11,7 +11,6 @@ const Loader = () => (
 const styles = StyleSheet.create({
   spinnerContainer: {
     position: 'absolute',
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     top: '22%',

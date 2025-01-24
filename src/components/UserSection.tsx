@@ -4,7 +4,7 @@ import {AppColors} from '../utils/colors';
 import React, {FC} from 'react';
 import {ASSETS} from '../utils/assets';
 import IconContainer from './IconContainer';
-import {AppStyles} from '../utils/styles';
+import {AppStyles, AppStyleValues} from '../utils/styles';
 
 type UserSectionProps = {
   title: string;
@@ -27,8 +27,7 @@ const UserSection: FC<UserSectionProps> = ({title}) => {
 
 const styles = StyleSheet.create({
   user: {
-    width: '100%',
-    display: 'flex',
+    width: AppStyleValues.maxWidth,
     alignItems: 'center',
     flexDirection: 'row',
     paddingVertical: 10,

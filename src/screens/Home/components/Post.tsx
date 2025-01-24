@@ -1,14 +1,11 @@
 import {useNavigation, CommonActions} from '@react-navigation/native';
 import React, {useCallback} from 'react';
-import {useTranslation} from 'react-i18next';
 import PostType from '../../../types/post.type';
 import {NavigationProps, Routes} from '../../../utils/routes';
-import HomeComponent from './Task';
+import BlockComponent from './Block';
 import {AppStyles} from '../../../utils/styles';
 
 const Post = ({userId, id, title, body}: PostType) => {
-  const {t} = useTranslation();
-
   const navigation = useNavigation<NavigationProps>();
 
   const navigateToPost = useCallback(
@@ -21,13 +18,13 @@ const Post = ({userId, id, title, body}: PostType) => {
   );
 
   return (
-    <HomeComponent
+    <BlockComponent
       onPress={() => navigateToPost({userId, id, title, body})}
-      style={AppStyles.maxWidth}
+      style={AppStyles.itemWidth}
       key={id}>
-      <HomeComponent.Title>{title}</HomeComponent.Title>
-      <HomeComponent.SubTitle>{body}</HomeComponent.SubTitle>
-    </HomeComponent>
+      <BlockComponent.Title>{title}</BlockComponent.Title>
+      <BlockComponent.SubTitle>{body}</BlockComponent.SubTitle>
+    </BlockComponent>
   );
 };
 

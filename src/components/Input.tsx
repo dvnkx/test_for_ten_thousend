@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {AppColors} from '../utils/colors';
+import {AppStyleValues} from '../utils/styles';
 
 interface InputProps extends TextInputProps {
   errorMessage?: string;
@@ -31,7 +32,7 @@ const Input = forwardRef<TextInput, InputProps>(
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: AppStyleValues.maxWidth,
   },
   label: {
     marginVertical: 10,

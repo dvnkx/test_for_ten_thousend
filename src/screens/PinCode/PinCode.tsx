@@ -10,7 +10,7 @@ import {
 import {ASSETS} from '../../utils/assets';
 import {Button, IconContainer} from '../../components';
 import {AppColors} from '../../utils/colors';
-import {AppStyles} from '../../utils/styles';
+import {AppStyles, AppStyleValues} from '../../utils/styles';
 import Keychain from 'react-native-keychain';
 import {useDispatch} from 'react-redux';
 import {verify} from '../../redux/slices/verify.slice';
@@ -171,7 +171,7 @@ const PinCode = () => {
     <View style={styles.container}>
       <View style={styles.content}>
         <IconContainer icon={ASSETS.smartphone} />
-        <Text style={[AppStyles.title, {marginVertical: 15}]}>
+        <Text style={[AppStyles.title, styles.title]}>
           {step === 'create'
             ? 'Create a PIN code'
             : step === 'confirm'
@@ -206,7 +206,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-
+  title: {
+    marginVertical: 15,
+  },
   pinContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -224,7 +226,7 @@ const styles = StyleSheet.create({
   },
   keypad: {
     marginTop: 150,
-    width: '100%',
+    width: AppStyleValues.maxWidth,
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: AppColors.chinese_silver,
@@ -244,7 +246,7 @@ const styles = StyleSheet.create({
   keyText: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#000',
+    color: AppColors.dark_charcoal,
   },
   emptyKey: {
     backgroundColor: 'transparent',

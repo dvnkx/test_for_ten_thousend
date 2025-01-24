@@ -1,18 +1,20 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {
+  FlatList,
   NativeSyntheticEvent,
   StyleSheet,
+  Text,
   TextInput,
   TextInputChangeEventData,
+  View,
 } from 'react-native';
 import {Input, Loader, ScreenTitle} from '../../components';
-import {useQuery} from '@tanstack/react-query';
-import {fetchSearchPosts} from '../../api/services/getPosts';
-import PostType from '../../types/post.type';
-import Post from './components/Post';
-import {ScrollView} from 'react-native-gesture-handler';
+import {useInfiniteQuery} from '@tanstack/react-query';
+import {fetchPosts} from '../../api/services/getPosts.service';
 import {useTranslation} from 'react-i18next';
-import {useDebounce} from '../../hooks/useDebounce';
+import {useDebounce} from '../../hooks/useDebounce.hook';
+import Post from './components/Post';
+import {AppColors} from '../../utils/colors';
 
 type PostsProps = {
   search: string;
@@ -20,37 +22,63 @@ type PostsProps = {
 
 const Posts: FC<PostsProps> = ({search}) => {
   const debouncedSearch = useDebounce(search, 500);
-  const {data, isLoading, isError} = useQuery<PostType[]>({
-    queryFn: () => {
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['posts', `posts=${debouncedSearch}`],
+    queryFn: ({pageParam}) => {
       if (debouncedSearch) {
-        return fetchSearchPosts(debouncedSearch);
-      } else {
-        return fetchSearchPosts('');
+        return fetchPosts({pageParam: 0, search: debouncedSearch});
       }
+      return fetchPosts({pageParam, search: ''});
     },
-    queryKey: ['searchPosts', debouncedSearch],
+    initialPageParam: 0,
+    getNextPageParam: lastPage => lastPage.nextPage,
   });
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const handleLoadMore = () => {
+    if (hasNextPage && !isFetchingNextPage && !debouncedSearch) {
+      fetchNextPage();
+    }
+  };
 
-  if (isError) {
-    return;
-  }
+  if (isLoading) return <Loader />;
+
+  if (isError)
+    return <Text style={[styles.message, styles.error]}>{error.message}</Text>;
+
+  if (!data || data.pages.flatMap(posts => posts.data).length === 0)
+    return (
+      <Text style={[styles.message, styles.empty]}>
+        There are no such posts
+      </Text>
+    );
 
   return (
     <>
-      {data &&
-        data.map(post => (
-          <Post
-            key={post.id}
-            id={post.id}
-            userId={post.userId}
-            title={post.title}
-            body={post.body}
-          />
-        ))}
+      {data && (
+        <FlatList
+          data={data.pages.flatMap(posts => posts.data)}
+          renderItem={({item}) => (
+            <Post
+              key={item.id}
+              id={item.id}
+              userId={item.userId}
+              title={item.title}
+              body={item.body}
+            />
+          )}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={handleLoadMore}
+          ListFooterComponent={isFetchingNextPage ? <Loader /> : null}
+        />
+      )}
     </>
   );
 };
@@ -70,9 +98,7 @@ const Search = () => {
     }
   }, []);
   return (
-    <ScrollView
-      contentContainerStyle={{justifyContent: 'center'}}
-      style={styles.container}>
+    <View style={styles.container}>
       <ScreenTitle title={t('search.title')} />
       <Input
         value={search}
@@ -82,7 +108,7 @@ const Search = () => {
         style={styles.inputContainer}
       />
       <Posts search={search} />
-    </ScrollView>
+    </View>
   );
 };
 
@@ -90,12 +116,24 @@ const styles = StyleSheet.create({
   container: {
     margin: 20,
     display: 'flex',
+    justifyContent: 'center',
   },
   containerContent: {
     justifyContent: 'center',
   },
   inputContainer: {
     marginTop: 20,
+  },
+  message: {
+    fontSize: 30,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  empty: {
+    color: AppColors.primary,
+  },
+  error: {
+    color: AppColors.error,
   },
 });
 
