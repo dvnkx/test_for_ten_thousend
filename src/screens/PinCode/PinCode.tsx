@@ -16,6 +16,7 @@ import {useDispatch} from 'react-redux';
 import {verify} from '../../redux/slices/verify.slice';
 import {StepType, TempPinType} from '../../types/pin.types';
 import {useTranslation} from 'react-i18next';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 type KeyPadProps = {
   handleKeyPress: (value: string) => void;
@@ -101,16 +102,35 @@ const PinCode = () => {
   const [step, setStep] = useState<StepType>('verify');
   const [tempPin, setTempPin] = useState<TempPinType>(null);
   const {t} = useTranslation();
+  const rnBiometrics = new ReactNativeBiometrics({
+    allowDeviceCredentials: true,
+  });
 
   useEffect(() => {
+    const verifyPin = async () => {
+      if (step === 'verify') {
+        const {success} = await rnBiometrics.simplePrompt({
+          promptMessage: t('pinCode.verifyPrompt'),
+        });
+
+        if (success) {
+          dispatch(verify());
+        }
+      }
+    };
+
     const checkExistingPin = async () => {
       const credentials = await Keychain.getGenericPassword({
         service: 'userPin',
       });
+
       if (!credentials) {
         setStep('create');
+      } else {
+        verifyPin();
       }
     };
+
     checkExistingPin();
   }, []);
 
@@ -144,7 +164,7 @@ const PinCode = () => {
           dispatch(verify());
           resetPinAndStep('verify');
         } else {
-          Alert.alert('Error', 'PIN codes do not match. Try again.');
+          Alert.alert(t('pinCode.error'), t('pinCode.pinDoNotMatch'));
           resetPinAndStep('create');
         }
       } else if (step === 'verify') {

@@ -4,8 +4,10 @@
     "subtitle": "Enter 5 digit code",
     "error": {
       "error": "Error",
-      "errorMessage": "Incorrect PIN. Try again."
-    }
+      "errorMessage": "Incorrect PIN. Try again.",
+      "pinDoNotMatch": "PIN codes do not match. Try again."
+    },
+    "verifyPrompt": "Confirm your identity"
   },
   "settings": {
     "title": "Settings",
