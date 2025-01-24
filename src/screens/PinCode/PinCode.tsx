@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   keyText: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#000',
+    color: AppColors.dark_charcoal,
   },
   emptyKey: {
     backgroundColor: 'transparent',

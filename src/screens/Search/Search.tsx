@@ -40,16 +40,7 @@ const Posts: FC<PostsProps> = ({search}) => {
     },
     initialPageParam: 0,
     getNextPageParam: lastPage => lastPage.nextPage,
-    gcTime: 0,
   });
-
-  if (isLoading) {
-    <Loader />;
-  }
-
-  if (isError) {
-    <Text style={[styles.message, styles.error]}>{error.message}</Text>;
-  }
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage && !debouncedSearch) {
@@ -57,9 +48,16 @@ const Posts: FC<PostsProps> = ({search}) => {
     }
   };
 
+  if (isLoading) return <Loader />;
+
+  if (isError)
+    return <Text style={[styles.message, styles.error]}>{error.message}</Text>;
+
   if (!data || data.pages.flatMap(posts => posts.data).length === 0)
     return (
-      <Text style={[styles.message, styles.empty]}>There are no posts</Text>
+      <Text style={[styles.message, styles.empty]}>
+        There are no such posts
+      </Text>
     );
 
   return (
