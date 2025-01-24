@@ -110,7 +110,7 @@ const PinCode = () => {
     const verifyPin = async () => {
       if (step === 'verify') {
         const {success} = await rnBiometrics.simplePrompt({
-          promptMessage: 'Confirm your identity',
+          promptMessage: t('pinCode.verifyPrompt'),
         });
 
         if (success) {
@@ -164,7 +164,7 @@ const PinCode = () => {
           dispatch(verify());
           resetPinAndStep('verify');
         } else {
-          Alert.alert('Error', 'PIN codes do not match. Try again.');
+          Alert.alert(t('pinCode.error'), t('pinCode.pinDoNotMatch'));
           resetPinAndStep('create');
         }
       } else if (step === 'verify') {
