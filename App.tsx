@@ -44,6 +44,12 @@ const MainStack = () => (
   </Stack.Navigator>
 );
 
+const VerifyStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name={Routes.PINCODE} component={PinCode} />
+  </Stack.Navigator>
+);
+
 const RootNavigator = () => {
   const userLocalization = useSelector(
     (state: RootState) => state.auth.user?.localization,
@@ -73,17 +79,7 @@ const RootNavigator = () => {
 
   return (
     <NavigationContainer>
-      {isAuth ? (
-        isVerified ? (
-          <MainStack />
-        ) : (
-          <Stack.Navigator>
-            <Stack.Screen name={Routes.PINCODE} component={PinCode} />
-          </Stack.Navigator>
-        )
-      ) : (
-        <AuthStack />
-      )}
+      {isAuth ? isVerified ? <MainStack /> : <VerifyStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
