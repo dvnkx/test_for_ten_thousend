@@ -18,7 +18,51 @@
   "home": {
     "header": "Your name",
     "beforeYouStart": "Before You Start",
-    "posts": "Posts"
+    "posts": "Posts",
+    "beforeYouStartData": {
+      "preparationSteps": {
+        "title": "Preparation Steps",
+        "subtitle": "Ensure all resources are gathered and ready before starting.",
+        "buttonText": "Get Ready"
+      },
+      "understandingTheProcess": {
+        "title": "Understanding the Process",
+        "subtitle": "Familiarize yourself with the steps involved to avoid confusion.",
+        "buttonText": "Learn Process"
+      },
+      "checklist": {
+        "title": "Checklist",
+        "subtitle": "Go through the checklist to verify you’re all set to begin.",
+        "buttonText": "View Checklist"
+      },
+      "setGoals": {
+        "title": "Set Goals",
+        "subtitle": "Define clear and measurable goals to track progress.",
+        "buttonText": "Set Goals"
+      },
+      "timeManagement": {
+        "title": "Time Management",
+        "subtitle": "Ensure you allocate sufficient time for the task completion.",
+        "buttonText": "Manage Time"
+      }
+    },
+    "tasksData": {
+      "taskOverview": {
+        "title": "Task Overview",
+        "subtitle": "This task provides a brief introduction to the subject matter.",
+        "buttonText": "Learn More"
+      },
+      "taskObjectives": {
+        "title": "Task Objectives",
+        "subtitle": "The main goal is to complete the required steps to achieve the desired outcome.",
+        "buttonText": "View Objectives"
+      },
+      "taskRequirements": {
+        "title": "Task Requirements",
+        "subtitle": "Ensure you meet the prerequisites before proceeding with the task.",
+        "buttonText": "Check Requirements"
+      }
+    }
   },
   "post": "About",
   "posts": {

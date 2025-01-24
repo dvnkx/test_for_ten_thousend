@@ -18,7 +18,51 @@
   "home": {
     "header": "اسمك",
     "beforeYouStart": "قبل أن تبدأ",
-    "posts": "دعامات"
+    "posts": "دعامات",
+    "beforeYouStartData": {
+      "preparationSteps": {
+        "title": "خطوات التحضير",
+        "subtitle": "تأكد من جمع جميع الموارد وجاهزيتها قبل البدء.",
+        "buttonText": "استعد"
+      },
+      "understandingTheProcess": {
+        "title": "فهم العملية",
+        "subtitle": "تعرف على الخطوات لتجنب الالتباس.",
+        "buttonText": "تعلم العملية"
+      },
+      "checklist": {
+        "title": "قائمة التحقق",
+        "subtitle": "تحقق من القائمة للتأكد من أنك جاهز للبدء.",
+        "buttonText": "عرض القائمة"
+      },
+      "setGoals": {
+        "title": "تحديد الأهداف",
+        "subtitle": "حدد أهدافًا واضحة وقابلة للقياس لمتابعة التقدم.",
+        "buttonText": "حدد الأهداف"
+      },
+      "timeManagement": {
+        "title": "إدارة الوقت",
+        "subtitle": "تأكد من تخصيص وقت كافٍ لإتمام المهمة.",
+        "buttonText": "إدارة الوقت"
+      }
+    },
+    "tasksData": {
+      "taskOverview": {
+        "title": "نظرة عامة على المهمة",
+        "subtitle": "توفر هذه المهمة مقدمة مختصرة عن الموضوع.",
+        "buttonText": "تعرف على المزيد"
+      },
+      "taskObjectives": {
+        "title": "أهداف المهمة",
+        "subtitle": "الهدف الرئيسي هو إكمال الخطوات المطلوبة لتحقيق النتيجة المرجوة.",
+        "buttonText": "عرض الأهداف"
+      },
+      "taskRequirements": {
+        "title": "متطلبات المهمة",
+        "subtitle": "تأكد من استيفاء المتطلبات قبل المتابعة.",
+        "buttonText": "تحقق من المتطلبات"
+      }
+    }
   },
   "post": "عن",
   "posts": {

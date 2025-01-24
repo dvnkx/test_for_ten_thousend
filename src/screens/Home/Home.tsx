@@ -9,7 +9,6 @@ import {fetchPostsFrom} from '../../api/services/getPosts.service';
 import HomeScrollView from './components/HomeScrollView';
 import PostType from '../../types/post.type';
 import {Loader, ScreenHeader, ScreenSubtitle} from '../../components';
-import {beforeYouStartData, tasksData} from '../../db/home.data';
 import {useTranslation} from 'react-i18next';
 import Post from './components/Post';
 
@@ -31,33 +30,55 @@ const HeaderSection = () => {
   );
 };
 
-const TasksSection = () => (
-  <HomeScrollView horizontal>
-    {tasksData.map(task => (
-      <BlockComponent disabled key={task.id}>
-        <BlockComponent.Title>{task.title}</BlockComponent.Title>
-        <BlockComponent.SubTitle>{task.subtitle}</BlockComponent.SubTitle>
-        <BlockComponent.Button>{task.buttonText}</BlockComponent.Button>
-      </BlockComponent>
-    ))}
-  </HomeScrollView>
-);
+type Task = {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+};
+
+const TasksSection = () => {
+  const {t} = useTranslation();
+  const tasksData = t('home.tasksData', {returnObjects: true}) as Record<
+    string,
+    Task
+  >;
+
+  return (
+    <HomeScrollView horizontal>
+      {Object.keys(tasksData).map(key => {
+        const task = tasksData[key];
+        return (
+          <BlockComponent disabled key={key}>
+            <BlockComponent.Title>{task.title}</BlockComponent.Title>
+            <BlockComponent.SubTitle>{task.subtitle}</BlockComponent.SubTitle>
+            <BlockComponent.Button>{task.buttonText}</BlockComponent.Button>
+          </BlockComponent>
+        );
+      })}
+    </HomeScrollView>
+  );
+};
 
 const BeforeYouStart = () => {
   const {t} = useTranslation();
+  const beforeYouStartData = t('home.beforeYouStartData', {
+    returnObjects: true,
+  }) as Record<string, Task>;
+
   return (
     <>
       <ScreenSubtitle subtitle={t('home.beforeYouStart')} />
       <HomeScrollView horizontal>
-        {beforeYouStartData.map(task => (
-          <BlockComponent disabled key={task.id}>
-            <BlockComponent.Title>{t(task.title)}</BlockComponent.Title>
-            <BlockComponent.SubTitle>
-              {t(task.subtitle)}
-            </BlockComponent.SubTitle>
-            <BlockComponent.Button>{t(task.buttonText)}</BlockComponent.Button>
-          </BlockComponent>
-        ))}
+        {Object.keys(beforeYouStartData).map(key => {
+          const task = beforeYouStartData[key];
+          return (
+            <BlockComponent disabled key={key}>
+              <BlockComponent.Title>{task.title}</BlockComponent.Title>
+              <BlockComponent.SubTitle>{task.subtitle}</BlockComponent.SubTitle>
+              <BlockComponent.Button>{task.buttonText}</BlockComponent.Button>
+            </BlockComponent>
+          );
+        })}
       </HomeScrollView>
     </>
   );

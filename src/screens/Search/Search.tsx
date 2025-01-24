@@ -48,17 +48,21 @@ const Posts: FC<PostsProps> = ({search}) => {
     }
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  if (isError)
+  if (isError) {
     return <Text style={[styles.message, styles.error]}>{error.message}</Text>;
+  }
 
-  if (!data || data.pages.flatMap(posts => posts.data).length === 0)
+  if (!data || data.pages.flatMap(posts => posts.data).length === 0) {
     return (
       <Text style={[styles.message, styles.empty]}>
         There are no such posts
       </Text>
     );
+  }
 
   return (
     <>
